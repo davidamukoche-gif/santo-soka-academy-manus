@@ -597,3 +597,14 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 .mt-0 { margin-top: 0 !important; }
 .mb-0 { margin-bottom: 0 !important; }
 .center { text-align: center; }
+
+/* Secure form honeypot: invisible to people, available to spam bots. */
+.form-trap { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+
+/* Keep long contact destinations readable on narrow screens. */
+.info-list li { min-width: 0; }
+.info-list li a { overflow-wrap: anywhere; word-break: break-word; }
+@media (max-width: 560px) {
+  .info-card, .contact form { min-width: 0; }
+  .info-list li { align-items: flex-start; }
+}

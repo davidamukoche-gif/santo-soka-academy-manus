@@ -18,18 +18,62 @@ document.addEventListener("DOMContentLoaded", () => {
     if (href === path) a.classList.add("active");
   });
 
-  // Contact form (client-side only; no backend)
+  // Secure trial registration submission.
   const form = document.querySelector("form.contact");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const button = form.querySelector("button[type=submit]");
       const msg = form.querySelector(".form-msg");
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (button) {
+        button.disabled = true;
+        button.setAttribute("aria-busy", "true");
+      }
       if (msg) {
         msg.classList.add("show");
-        msg.textContent =
-          "Thanks! We received your message and will be in touch soon.";
+        msg.textContent = "Sending your registration…";
       }
-      form.reset();
+      try {
+        const response = await fetch("/api/trpc/trials.submit?batch=1", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ 0: { json: payload } }),
+        });
+        const body = await response.json();
+        const result = body?.[0]?.result?.data?.json;
+        if (!response.ok || !result?.success) throw new Error("Submission failed");
+        if (msg) msg.textContent = "Thanks! We received your registration and will be in touch soon.";
+        form.reset();
+      } catch (error) {
+        console.error("[Trial registration]", error);
+        if (msg) msg.textContent = "We could not send your registration. Please call or WhatsApp 0724325653.";
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute("aria-busy");
+        }
+      }
+    });
+  }
+
+  // Gallery filters.
+  const galleryItems = document.querySelectorAll("[data-tag]");
+  const filterButtons = document.querySelectorAll("[data-f]");
+  if (galleryItems.length && filterButtons.length) {
+    filterButtons.forEach((filterButton) => {
+      filterButton.addEventListener("click", () => {
+        const filter = filterButton.getAttribute("data-f");
+        filterButtons.forEach((button) => {
+          const active = button === filterButton;
+          button.classList.toggle("active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        galleryItems.forEach((item) => {
+          item.hidden = !(filter === "all" || item.getAttribute("data-tag") === filter);
+        });
+      });
     });
   }
 
