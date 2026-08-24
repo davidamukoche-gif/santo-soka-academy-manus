@@ -1,28 +1,333 @@
 <!doctype html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Santo Soka Academy — Nurturing Kenya's Next Football Stars</title>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Santo Soka Academy · Nairobi</title>
-    <meta name="description" content="Santo Soka Academy — youth football development from Under-6 through Senior in Nairobi, Kenya." />
-    <meta name="theme-color" content="#123b2d" />    
-    <!-- THIS IS THE START OF A COMMENT BLOCK, BLOCK TO BE DELETED: Google Fonts here, example:
+      name="description"
+      content="Santo Soka Academy is a Dagoretti-based football academy in Nairobi, Kenya, developing players from Under-6 through the Senior team."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    THIS IS THE END OF A COMMENT BLOCK, BLOCK TO BE DELETED -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/jpeg" href="/manus-storage/crest_48b5cf38.jpg" />
   </head>
-
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
-  </body>
+    <!-- NAV -->
+    <header class="site-header">
+      <div class="nav">
+        <a href="/" class="brand">
+          <div class="brand-badge"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+          <div class="brand-name">
+            Santo Soka Academy
+            <small>Dagoretti • Nairobi</small>
+          </div>
+        </a>
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          ≡
+        </button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/teams.html">Teams</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html" class="cta-btn">Join Trials</a></li>
+        </ul>
+      </div>
+    </header>
 
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">Academy Est. 2010 • Dagoretti, Nairobi</span>
+        <h1>Where Kenya's Next Generation Finds Its Game.</h1>
+        <p class="lead">
+          From our youngest Under-6 starters to the Senior team, Santo Soka
+          Academy develops players with discipline, creativity and heart —
+          right here in Dagoretti, Nairobi.
+        </p>
+        <div class="hero-actions">
+          <a href="/contact.html" class="btn btn-primary">Register for Trials</a>
+          <a href="/teams.html" class="btn btn-ghost">Explore Our Teams →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <strong data-count="250">0</strong>
+          <span>Active Players</span>
+        </div>
+        <div class="stat">
+          <strong data-count="9">0</strong>
+          <span>Age Categories</span>
+        </div>
+        <div class="stat">
+          <strong data-count="15">0</strong>
+          <span>Years Developing Talent</span>
+        </div>
+        <div class="stat">
+          <strong data-count="15">0</strong>
+          <span>Qualified Coaches</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT TEASER -->
+    <section>
+      <div class="container split">
+        <div>
+          <span class="eyebrow" style="color: var(--green-700); border-color: rgba(15,107,50,0.35);"
+            >About the academy</span
+          >
+          <h2>Grassroots football, done the right way.</h2>
+          <p>
+            Santo Soka Academy is a Kenyan football academy based in the
+            <strong>Dagoretti area of Nairobi</strong>, founded in 2010. We
+            are a standalone academy rooted in our community, with a full
+            pathway from the first touch at Under-6 to senior football.
+          </p>
+          <p>
+            Our academy trains boys and girls from
+            <strong>age 4 to 20</strong>, giving every player a real
+            pathway — from their first ever session in an Under-6 shirt
+            all the way to the Senior team.
+          </p>
+          <a href="/about.html" class="btn btn-primary">Read our story →</a>
+        </div>
+        <div class="split-media">
+          <img
+            src="/manus-storage/u10-training_98c7771a.webp"
+            alt="Young footballers training at an academy session"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAMS PREVIEW -->
+    <section style="background: #ffffff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Teams</span>
+          <h2>From Under-6 to the Senior team</h2>
+          <p>
+            Every age group has its own coaching staff, training schedule
+            and matchday calendar. Players progress through a clear
+            pathway with the same playing philosophy at every level.
+          </p>
+        </div>
+
+        <div class="teams-grid">
+          <a class="team-card" href="/teams.html#u6">
+            <div class="thumb">
+              <span class="age">U6</span>
+              <img src="/manus-storage/u8-boots_eb97faa2.webp" alt="" />
+              <div class="thumb-title">Little Stars</div>
+            </div>
+            <div class="body">
+              <p>First touch, fun, coordination — a joyful introduction to the game.</p>
+              <div class="meta"><span class="chip">Ages 4–6</span><span class="chip">2× / week</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u8">
+            <div class="thumb">
+              <span class="age">U8</span>
+              <img src="/manus-storage/u8-boots_eb97faa2.webp" alt="" />
+              <div class="thumb-title">Foundation</div>
+            </div>
+            <div class="body">
+              <p>Ball mastery and small-sided games to build a confident first touch.</p>
+              <div class="meta"><span class="chip">Ages 7–8</span><span class="chip">2× / week</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u10">
+            <div class="thumb">
+              <span class="age">U10</span>
+              <img src="/manus-storage/u10-training_98c7771a.webp" alt="" />
+              <div class="thumb-title">Development</div>
+            </div>
+            <div class="body">
+              <p>Introducing positional awareness, passing patterns and first fixtures.</p>
+              <div class="meta"><span class="chip">Ages 9–10</span><span class="chip">Weekend fixtures</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u12">
+            <div class="thumb">
+              <span class="age">U12</span>
+              <img src="/manus-storage/u12-match_db67dcf5.webp" alt="" />
+              <div class="thumb-title">Futures</div>
+            </div>
+            <div class="body">
+              <p>Deeper technical work and first competitive league experience.</p>
+              <div class="meta"><span class="chip">Ages 11–12</span><span class="chip">Local leagues</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u14">
+            <div class="thumb">
+              <span class="age">U14</span>
+              <img src="/manus-storage/u12-trophy_7b5f8ee5.jpg" alt="" />
+              <div class="thumb-title">Elite Youth</div>
+            </div>
+            <div class="body">
+              <p>Specialised positional training and strength &amp; conditioning begin.</p>
+              <div class="meta"><span class="chip">Ages 13–14</span><span class="chip">County level</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u16">
+            <div class="thumb">
+              <span class="age">U16</span>
+              <img src="/manus-storage/u16-kick_016a7b27.webp" alt="" />
+              <div class="thumb-title">Academy</div>
+            </div>
+            <div class="body">
+              <p>Match analysis, tactical periodisation and scouting exposure.</p>
+              <div class="meta"><span class="chip">Ages 15–16</span><span class="chip">Regional</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#u18">
+            <div class="thumb">
+              <span class="age">U18</span>
+              <img src="/manus-storage/u18-jog_ea480ce4.webp" alt="" />
+              <div class="thumb-title">Reserves Pathway</div>
+            </div>
+            <div class="body">
+              <p>The bridge between youth and senior football at Santo Soka.</p>
+              <div class="meta"><span class="chip">Ages 17–18</span><span class="chip">Trial pathway</span></div>
+            </div>
+          </a>
+          <a class="team-card" href="/teams.html#senior">
+            <div class="thumb">
+              <span class="age">SEN</span>
+              <img src="/manus-storage/senior-dribble_54b8aaae.webp" alt="" />
+              <div class="thumb-title">Senior Team</div>
+            </div>
+            <div class="body">
+              <p>The senior side — where academy graduates step into men's football.</p>
+              <div class="meta"><span class="chip">18+</span><span class="chip">Senior</span></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="center" style="margin-top: 32px;">
+          <a href="/teams.html" class="btn btn-primary">See full team pages →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What we do</span>
+          <h2>More than football</h2>
+          <p>
+            Technical development, competitive pathways and a focus on
+            the whole player — on and off the pitch.
+          </p>
+        </div>
+        <div class="programs">
+          <div class="program">
+            <div class="icon">⚽</div>
+            <h3>Skills Development</h3>
+            <p>Age-appropriate curriculums focused on the 4 corners: technical, tactical, physical and psychological.</p>
+          </div>
+          <div class="program">
+            <div class="icon">🏆</div>
+            <h3>Competitive Leagues</h3>
+            <p>Teams play in FKF Nairobi West and invitational tournaments across Kenya.</p>
+          </div>
+          <div class="program">
+            <div class="icon">🎓</div>
+            <h3>Education Partnership</h3>
+            <p>We work with parents and schools so football supports — never replaces — education.</p>
+          </div>
+          <div class="program">
+            <div class="icon">🌱</div>
+            <h3>Community First</h3>
+            <p>Free and subsidised slots for talented players from our Dagoretti community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLOUT -->
+    <section>
+      <div class="container">
+        <div class="callout">
+          <div>
+            <h2>Trials are open — bring your boots.</h2>
+            <p>Register your child for an open trial day. Every age group welcome.</p>
+          </div>
+          <a href="/contact.html" class="btn btn-primary">Start Registration</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand">
+              <div class="brand-badge"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+              <div class="brand-name">
+                Santo Soka Academy
+                <small>Dagoretti • Nairobi</small>
+              </div>
+            </div>
+            <p style="color:#cde4d4; margin-top: 14px; max-width: 34ch;">
+              A Dagoretti-based football academy in Nairobi. Developing
+              footballers from Under-6 to the Senior team since 2010.
+            </p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="/about.html">About</a></li>
+              <li><a href="/teams.html">Teams</a></li>
+              <li><a href="/gallery.html">Gallery</a></li>
+              <li><a href="/contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Age Groups</h4>
+            <ul>
+              <li><a href="/teams.html#u6">Under-6 • Under-8</a></li>
+              <li><a href="/teams.html#u10">Under-10 • Under-12</a></li>
+              <li><a href="/teams.html#u14">Under-14 • Under-16</a></li>
+              <li><a href="/teams.html#u18">Under-18 • Senior</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <div class="socials">
+              <a href="https://www.instagram.com/santos_soka_academy/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+              <a href="mailto:info@santosoka.co.ke" aria-label="Email">✉</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div>© <span id="year"></span> Santo Soka Academy. All rights reserved.</div>
+          <div>Proudly based in Dagoretti, Nairobi 🇰🇪</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

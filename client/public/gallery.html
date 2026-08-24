@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery — Santo Soka Academy</title>
+    <meta name="description" content="Photos from Santo Soka Academy training sessions, matches and community days." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/jpeg" href="/manus-storage/crest_48b5cf38.jpg" />
+    <style>
+      .filters { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 0 0 28px; }
+      .filters button {
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--green-900);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all .15s ease;
+      }
+      .filters button:hover { border-color: var(--green-700); }
+      .filters button.active { background: var(--green-700); color: #fff; border-color: var(--green-700); }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav">
+        <a href="/" class="brand">
+          <div class="brand-badge"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+          <div class="brand-name">Santo Soka Academy<small>Dagoretti • Nairobi</small></div>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">≡</button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/teams.html">Teams</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html" class="cta-btn">Join Trials</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="crumbs"><a href="/">Home</a> / Gallery</div>
+        <h1>Life at Santo Soka</h1>
+        <p>Training sessions, matchdays and silverware from around the academy. Follow <a href="https://www.instagram.com/santos_soka_academy/" target="_blank" rel="noopener">@santos_soka_academy</a> for more.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="filters" id="filters">
+          <button data-f="all" class="active">All</button>
+          <button data-f="training">Training</button>
+          <button data-f="match">Matchday</button>
+          <button data-f="youth">Youth Teams</button>
+          <button data-f="senior">Senior Team</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <figure data-tag="training"><img src="/manus-storage/u10-training_98c7771a.webp" alt="Young player working on ball mastery at training" /><figcaption>Ball mastery · training</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/hero-action_607b2404.webp" alt="Senior player flying over a tackle" /><figcaption>Senior matchday</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/u12-trophy_7b5f8ee5.jpg" alt="Young Santos Soka player holding the Future Stars U12 trophy" /><figcaption>Future Stars U12 champions</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/u12-match_db67dcf5.webp" alt="U12 player on matchday in the Autowear kit" /><figcaption>U12 · matchday</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/senior-trophy_483ee289.webp" alt="Senior player celebrating with a medal and trophy" /><figcaption>Trophy &amp; medal</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/u8-boots_eb97faa2.webp" alt="Yellow socks and worn-in boots on the training pitch" /><figcaption>Ready to train</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/u16-kick_016a7b27.webp" alt="Player striking the ball on a dirt pitch" /><figcaption>Striking the ball</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/senior-dribble_54b8aaae.webp" alt="Senior player driving at the defence" /><figcaption>Driving forward</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/u18-jog_ea480ce4.webp" alt="Player in the orange Santos Soka kit" /><figcaption>Santos Soka orange</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/coach-md_1d8c07d0.webp" alt="Coach MD in the team tracksuit" /><figcaption>On the touchline</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/fkf-coaching-course_efa0d491.webp" alt="Coaches with FKF Introductory Level coaching certificate" /><figcaption>FKF coaching certification</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /><figcaption>Santos Soka Academy crest</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/khan-jal-kume_96a99d40.webp" alt="Khan Jal Kume, Santos Soka alumnus now with El Merreikh SC Bentiu in the South Sudan Premier League" loading="lazy" /><figcaption>Khan Jal Kume · Santos Soka to South Sudan Premier League</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-01_04b51a81.webp" alt="Santos Soka Academy — Young player in training bib on the pitch" loading="lazy" /><figcaption>Young player in training bib on the pitch</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-02_e6f904b1.webp" alt="Santos Soka Academy — Team huddle in the lime green kit" loading="lazy" /><figcaption>Team huddle in the lime green kit</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-03_44fd660c.webp" alt="Santos Soka Academy — Coach on the sideline" loading="lazy" /><figcaption>Coach on the sideline</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-04_8b452bde.webp" alt="Santos Soka Academy — Lime green youth squad lined up with their coach" loading="lazy" /><figcaption>Lime green youth squad lined up with their coach</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-05_cdf242c9.webp" alt="Santos Soka Academy — Goalkeeper taking a throw in the orange kit" loading="lazy" /><figcaption>Goalkeeper taking a throw in the orange kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-06_0c8ef9b3.webp" alt="Santos Soka Academy — Matchday attack in the yellow-and-black striped kit" loading="lazy" /><figcaption>Matchday attack in the yellow-and-black striped kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-07_128b52cc.webp" alt="Santos Soka Academy — Battle for the ball on the dusty pitch" loading="lazy" /><figcaption>Battle for the ball on the dusty pitch</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-08_f3b2f01b.webp" alt="Santos Soka Academy — Senior player running the channel in orange" loading="lazy" /><figcaption>Senior player running the channel in orange</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-09_f4117938.webp" alt="Santos Soka Academy — Academy boy after the match" loading="lazy" /><figcaption>Academy boy after the match</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-10_eb61a7a2.webp" alt="Santos Soka Academy — Lifting silverware after the final" loading="lazy" /><figcaption>Lifting silverware after the final</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-11_f194fbcc.webp" alt="Santos Soka Academy — Yellow-and-black kit vs maroon on matchday" loading="lazy" /><figcaption>Yellow-and-black kit vs maroon on matchday</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-12_10a421fc.webp" alt="Santos Soka Academy — Coach fires up the squad before kickoff" loading="lazy" /><figcaption>Coach fires up the squad before kickoff</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-13_1f6c58dc.webp" alt="Santos Soka Academy — Driving forward in the Autowear yellow stripes" loading="lazy" /><figcaption>Driving forward in the Autowear yellow stripes</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-14_7274c75a.webp" alt="Santos Soka Academy — Full-squad celebration after the final whistle" loading="lazy" /><figcaption>Full-squad celebration after the final whistle</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-15_14ace147.webp" alt="Santos Soka Academy — Standing tall in the Autowear stripes" loading="lazy" /><figcaption>Standing tall in the Autowear stripes</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-16_ca30aa6f.webp" alt="Santos Soka Academy — Reading the pass in the Autowear kit" loading="lazy" /><figcaption>Reading the pass in the Autowear kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-17_f93f1923.webp" alt="Santos Soka Academy — Front three in the striped kit" loading="lazy" /><figcaption>Front three in the striped kit</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-18_8a1e17b9.webp" alt="Santos Soka Academy — Young boy working on the ball in the lime kit" loading="lazy" /><figcaption>Young boy working on the ball in the lime kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-19_f27ddb1f.webp" alt="Santos Soka Academy — Individual trophy after a winning campaign" loading="lazy" /><figcaption>Individual trophy after a winning campaign</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-20_6b15e981.webp" alt="Santos Soka Academy — Breaking forward in the striped kit" loading="lazy" /><figcaption>Breaking forward in the striped kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-21_25430cf2.webp" alt="Santos Soka Academy — Battle in midfield" loading="lazy" /><figcaption>Battle in midfield</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-22_efb84f87.webp" alt="Santos Soka Academy — Squad celebration with trophy and medals" loading="lazy" /><figcaption>Squad celebration with trophy and medals</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-23_b8a4239b.webp" alt="Santos Soka Academy — Coaching certification ceremony" loading="lazy" /><figcaption>Coaching certification ceremony</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-24_f3ca7088.webp" alt="Santos Soka Academy — Lime-green squad in their Santos Soka academy kit" loading="lazy" /><figcaption>Lime-green squad in their Santos Soka academy kit</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-25_a0b66150.webp" alt="Santos Soka Academy — Quiet moment with a book before training" loading="lazy" /><figcaption>Quiet moment with a book before training</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-26_950f66d6.webp" alt="Santos Soka Academy — Talking tactics with the squad" loading="lazy" /><figcaption>Talking tactics with the squad</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-27_e4bf89cf.webp" alt="Santos Soka Academy — Running the wing in the orange kit" loading="lazy" /><figcaption>Running the wing in the orange kit</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-28_7829e001.webp" alt="Santos Soka Academy — In position in the Autowear stripes" loading="lazy" /><figcaption>In position in the Autowear stripes</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-29_c52f1495.webp" alt="Santos Soka Academy — Coach leads the youth side on the pitch" loading="lazy" /><figcaption>Coach leads the youth side on the pitch</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-30_e44c6213.webp" alt="Santos Soka Academy — Dribbling through the contest" loading="lazy" /><figcaption>Dribbling through the contest</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-31_f842403a.webp" alt="Santos Soka Academy — Youth session on the grass pitch" loading="lazy" /><figcaption>Youth session on the grass pitch</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-32_72aadc9d.webp" alt="Santos Soka Academy — Tackle in the orange kit" loading="lazy" /><figcaption>Tackle in the orange kit</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-33_55418cf6.webp" alt="Santos Soka Academy — Teammates ready in the academy kit" loading="lazy" /><figcaption>Teammates ready in the academy kit</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-34_c7599216.webp" alt="Santos Soka Academy — Chasing down the ball, Santos Soka orange" loading="lazy" /><figcaption>Chasing down the ball, Santos Soka orange</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-35_da9f6f9a.webp" alt="Santos Soka Academy — Senior squad lined up in the orange home kit" loading="lazy" /><figcaption>Senior squad lined up in the orange home kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-36_38928977.webp" alt="Santos Soka Academy — Pre-kickoff lineup" loading="lazy" /><figcaption>Pre-kickoff lineup</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-37_40bb2845.webp" alt="Santos Soka Academy — Solo shot in the Autowear stripes" loading="lazy" /><figcaption>Solo shot in the Autowear stripes</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-38_1f3a596d.webp" alt="Santos Soka Academy — Matchday against the navy side" loading="lazy" /><figcaption>Matchday against the navy side</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-39_b8757e5c.webp" alt="Santos Soka Academy — Lime-kit youth squad celebrates" loading="lazy" /><figcaption>Lime-kit youth squad celebrates</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-40_ddf3a037.webp" alt="Santos Soka Academy — Ball at feet in the striped kit" loading="lazy" /><figcaption>Ball at feet in the striped kit</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-41_d33430c7.webp" alt="Santos Soka Academy — Boots and yellow socks on the training pitch" loading="lazy" /><figcaption>Boots and yellow socks on the training pitch</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-42_43b31a63.webp" alt="Santos Soka Academy — Striking the ball in matchday yellow" loading="lazy" /><figcaption>Striking the ball in matchday yellow</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-43_7a866492.webp" alt="Santos Soka Academy — Bib-work on a youth session" loading="lazy" /><figcaption>Bib-work on a youth session</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-44_d3cd6dec.webp" alt="Santos Soka Academy — Tournament squad in the lime-and-red kit" loading="lazy" /><figcaption>Tournament squad in the lime-and-red kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-45_0e04c0be.webp" alt="Santos Soka Academy — Trophy lift after the final" loading="lazy" /><figcaption>Trophy lift after the final</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-46_cb3bdfce.webp" alt="Santos Soka Academy — Passing drill with the ball" loading="lazy" /><figcaption>Passing drill with the ball</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-47_68f3cda7.webp" alt="Santos Soka Academy — Composed on the ball in yellow stripes" loading="lazy" /><figcaption>Composed on the ball in yellow stripes</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-48_5b7dda78.webp" alt="Santos Soka Academy — Young teammates before training" loading="lazy" /><figcaption>Young teammates before training</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-49_8478f939.webp" alt="Santos Soka Academy — Roaring celebration after the win" loading="lazy" /><figcaption>Roaring celebration after the win</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-50_f71336a2.webp" alt="Santos Soka Academy — Academy squad in the black-and-yellow striped kit" loading="lazy" /><figcaption>Academy squad in the black-and-yellow striped kit</figcaption></figure>
+          <figure data-tag="youth"><img src="/manus-storage/img-51_9a03f471.webp" alt="Santos Soka Academy — Lime-kit youth squad ready to play" loading="lazy" /><figcaption>Lime-kit youth squad ready to play</figcaption></figure>
+          <figure data-tag="senior"><img src="/manus-storage/img-52_c0bb9b6b.webp" alt="Santos Soka Academy — Running onto a through ball in orange" loading="lazy" /><figcaption>Running onto a through ball in orange</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-53_946bddc9.webp" alt="Santos Soka Academy — Youngster on the ball in the striped kit" loading="lazy" /><figcaption>Youngster on the ball in the striped kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-54_67f41bd4.webp" alt="Santos Soka Academy — Celebrating as the trophy is lifted" loading="lazy" /><figcaption>Celebrating as the trophy is lifted</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-56_cd3c900a.webp" alt="Santos Soka Academy — Dust-up on the dirt pitch" loading="lazy" /><figcaption>Dust-up on the dirt pitch</figcaption></figure>
+          <figure data-tag="training"><img src="/manus-storage/img-58_6702052f.webp" alt="Santos Soka Academy — Keepie-uppies in the black kit" loading="lazy" /><figcaption>Keepie-uppies in the black kit</figcaption></figure>
+          <figure data-tag="match"><img src="/manus-storage/img-60_61761fed.webp" alt="Santos Soka Academy — Yellow stripes line up for kick-off" loading="lazy" /><figcaption>Yellow stripes line up for kick-off</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand">
+              <div class="brand-badge"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+              <div class="brand-name">Santo Soka Academy<small>Dagoretti • Nairobi</small></div>
+            </div>
+            <p style="color:#cde4d4; margin-top:14px; max-width:34ch;">A Dagoretti-based football academy in Nairobi, founded 2010.</p>
+          </div>
+          <div><h4>Explore</h4><ul><li><a href="/about.html">About</a></li><li><a href="/teams.html">Teams</a></li><li><a href="/gallery.html">Gallery</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+          <div><h4>Age Groups</h4><ul><li><a href="/teams.html#u6">Under-6 • Under-8</a></li><li><a href="/teams.html#u10">Under-10 • Under-12</a></li><li><a href="/teams.html#u14">Under-14 • Under-16</a></li><li><a href="/teams.html#u18">Under-18 • Senior</a></li></ul></div>
+          <div><h4>Follow</h4>
+            <div class="socials">
+              <a href="https://www.instagram.com/santos_soka_academy/" target="_blank" rel="noopener">IG</a>
+              <a href="mailto:info@santosoka.co.ke">✉</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div>© <span id="year"></span> Santo Soka Academy.</div>
+          <div>Proudly based in Dagoretti, Nairobi 🇰🇪</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const filters = document.getElementById("filters");
+      const gallery = document.getElementById("gallery");
+      filters.addEventListener("click", (e) => {
+        const btn = e.target.closest("button"); if (!btn) return;
+        filters.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.f;
+        gallery.querySelectorAll("figure").forEach(fig => {
+          fig.style.display = (f === "all" || fig.dataset.tag === f) ? "" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>
