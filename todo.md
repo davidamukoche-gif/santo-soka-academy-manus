@@ -53,3 +53,6 @@
 - [x] Wire the management-page sign-in button to the project’s secure OAuth start flow.
 - [ ] Verify an authorized admin can create a roster entry, resolve its stored image, view it publicly, and remove it without retaining test data; this requires the academy administrator’s authenticated session.
 - [ ] Save a final checkpoint after the authorized senior-player roster flow is verified.
+- [ ] Acquire the user-provided official Instagram image for Wall Kong and preserve its source link for attribution.
+- [ ] Add Wall Kong to the 2026/27 senior register as a midfielder and verify the image resolves on the public roster.
+- [ ] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.

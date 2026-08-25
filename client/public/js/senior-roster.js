@@ -21,7 +21,7 @@
     const response = await fetch(url, { credentials: "same-origin" });
     const body = await response.json().catch(() => null);
     if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "Could not load the roster.");
-    return body?.[0]?.result?.data?.json ?? [];
+    return body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? [];
   };
 
   const rpcMutation = async (procedure, input) => {
