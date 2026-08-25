@@ -608,3 +608,21 @@ form.contact textarea { min-height: 120px; resize: vertical; }
   .info-card, .contact form { min-width: 0; }
   .info-list li { align-items: flex-start; }
 }
+
+/* Latest news module */
+.latest-news { background: #0b3b1e; color: #f7fff8; }
+.news-split { align-items: center; gap: 56px; }
+.news-media { position: relative; }
+.news-media img { width: 100%; max-height: 520px; object-fit: cover; border-radius: var(--radius); }
+.news-credit { display: block; margin-top: 9px; color: #b8d9c0; font-size: .72rem; letter-spacing: .04em; }
+.news-copy h2, .news-copy p { color: #f7fff8; }
+.news-copy .eyebrow { color: var(--gold); border-color: rgba(244,196,48,.55); }
+.news-lead { font-size: 1.18rem; max-width: 48ch; }
+.news-copy p:not(.news-lead) { color: #cde4d4; max-width: 52ch; }
+.news-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 22px 0 26px; color: #d9f2df; font-size: .85rem; }
+.news-meta strong { color: var(--gold); }
+@media (max-width: 760px) {
+  .news-split { gap: 30px; }
+  .news-media img { max-height: 430px; }
+  .news-lead { font-size: 1.05rem; }
+}

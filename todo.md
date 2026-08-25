@@ -17,3 +17,7 @@
 - [ ] Connect automatic Google Workspace forwarding to mail@santossokaacademykenya.com (requires a deployable Workspace webhook or API credential).
 - [x] Update footer phone, email, Instagram, and TikTok links.
 - [x] Test mobile trial form layout and gallery filter wiring.
+- [x] Research and verify the latest county-league win and playoff qualification news from credible sources.
+- [x] Identify and prepare suitable rights-safe images or clearly attributed image references for the verified update.
+- [x] Add a verified news/update section to the Manus site without inventing facts.
+- [x] Verify the updated news section and image rendering on desktop and mobile.
