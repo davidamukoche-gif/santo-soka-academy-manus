@@ -57,3 +57,8 @@
 - [x] Add Wall Kong to the 2026/27 senior register as a midfielder and verify the image resolves on the public roster.
 - [ ] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.
 - [x] Preserve Wall Kong’s original Instagram post URL in project research and add a visible source note/link for the roster image.
+- [x] Fix the published admin OAuth redirect so it uses the approved Santos Soka Manus domain and no temporary Cloud Run hostname.
+- [x] Remove the manage-roster link from the public senior-player page while keeping the direct admin URL protected.
+- [x] Verify public/admin separation and save a corrected checkpoint.
+- [ ] Save a new checkpoint after the OAuth redirect fix and public-link removal.
+- [ ] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.

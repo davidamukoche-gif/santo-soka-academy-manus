@@ -11,6 +11,32 @@ function getQueryParam(req: Request, key: string): string | undefined {
   return typeof value === "string" ? value : undefined;
 }
 
+const APPROVED_PUBLIC_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
+
+function getPublicOrigin(req: Request): string {
+  const forwardedHost = req.get("x-forwarded-host")?.split(",")[0]?.trim();
+  const requestHost = forwardedHost || req.get("host") || "";
+  const requestProtocol = (req.get("x-forwarded-proto") || req.protocol).split(",")[0].trim();
+
+  // Manus production can expose an internal Cloud Run host to Express. Prefer
+  // the browser's public origin when available, otherwise use the allowlisted
+  // project domain rather than sending an invalid redirect_uri to OAuth.
+  if (requestHost.endsWith(".a.run.app")) {
+    const referer = req.get("referer");
+    if (referer) {
+      try {
+        const refererOrigin = new URL(referer).origin;
+        if (refererOrigin.endsWith(".manus.space")) return refererOrigin;
+      } catch {
+        // Fall through to the approved project origin.
+      }
+    }
+    return APPROVED_PUBLIC_ORIGIN;
+  }
+
+  return `${requestProtocol}://${requestHost}`;
+}
+
 export function registerOAuthRoutes(app: Express) {
   app.get("/api/oauth/start", (req: Request, res: Response) => {
     if (!ENV.oauthPortalUrl || !ENV.appId) {
@@ -19,8 +45,7 @@ export function registerOAuthRoutes(app: Express) {
     }
 
     const nonce = crypto.randomUUID();
-    const protocol = req.get("x-forwarded-proto") || req.protocol;
-    const redirectUri = `${protocol}://${req.get("host")}/api/oauth/callback`;
+    const redirectUri = `${getPublicOrigin(req)}/api/oauth/callback`;
     const state = encodeOAuthState({ redirectUri, nonce });
     res.cookie(OAUTH_STATE_COOKIE, nonce, { path: "/", maxAge: 600_000, sameSite: "none", secure: true });
 
@@ -77,7 +102,7 @@ export function registerOAuthRoutes(app: Express) {
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, "/");
+      res.redirect(302, "/manage-senior-players.html");
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       res.status(500).json({ error: "OAuth callback failed" });

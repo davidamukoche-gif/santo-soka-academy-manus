@@ -9,6 +9,7 @@
   const status = document.querySelector(isAdmin ? "#admin-status" : "#roster-status");
   const adminLogin = document.querySelector("#admin-login");
   const adminContent = document.querySelector("#admin-content");
+  const sourceNote = document.querySelector("#roster-source-note");
 
   const setStatus = (message, kind = "") => {
     if (!status) return;
@@ -39,6 +40,7 @@
   const renderRoster = (players) => {
     if (!roster) return;
     roster.innerHTML = "";
+    if (sourceNote) sourceNote.hidden = !players.some((player) => String(player.playerName).trim().toLowerCase() === "wall kong");
     if (!players.length) {
       if (empty) empty.hidden = false;
       return;
