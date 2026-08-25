@@ -1,4 +1,4 @@
-// Santo Soka Academy — small interactions
+// Santos Soka Academy — small interactions
 
 // Mobile nav toggle
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,4 +1,4 @@
-# Santo Soka Academy Project Checklist
+# Santos Soka Academy Project Checklist
 
 - [x] Upgrade the project with secure backend form handling.
 - [x] Record that forwarding to mail@santossokaacademykenya.com is deferred until the client authorizes the mailbox; current routing is configured and verified for the user’s Gmail.
@@ -32,3 +32,16 @@
 - [x] Add a contact-email action that uses the current Gmail destination.
 - [x] Document the later switch from the user’s Gmail destination to the client’s mailbox.
 - [x] Diagnose and resolve the failed Google Apps Script authorization or deployment before connecting Gmail delivery.
+
+- [x] Correct all public academy branding from “Santo Soka Academy” to “Santos Soka Academy” while preserving existing routes and content.
+- [x] Audit the supplied Futurestars story against available public sources and identify rights-safe Futurestars imagery.
+- [x] Add the verified Futurestars achievement and approved image(s) to the site with attribution where required.
+- [x] Verify Santos branding and Futurestars content on desktop and mobile, then save a new checkpoint.
+- [x] Review the four user-provided Instagram posts and record their captions, chronology, source URLs, and image candidates.
+- [x] Build and place a caption-led Futurestars story using the reviewed posts, with source credits and links.
+- [x] Add approved post images to the appropriate homepage news/gallery locations without inventing facts or removing attribution.
+- [x] Review the three new user-provided Instagram posts for the South Sudan pathway, recording captions, chronology, player identity, club/competition, and image candidates.
+- [x] Add a source-attributed international-pathway story connecting Santos Soka to South Sudan football, using only verified claims from the reviewed posts.
+- [x] Add approved South Sudan pathway image(s) to the appropriate About/news/gallery locations and retain source credits.
+- [x] Add a dedicated Futurestars story section with explicit verified milestones, visible credits, and outbound source links.
+- [x] Re-verify the Futurestars and Santos branding changes on desktop and mobile, then save a corrected checkpoint.

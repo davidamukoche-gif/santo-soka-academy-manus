@@ -1,4 +1,4 @@
-/* Santo Soka Academy — site styles */
+/* Santos Soka Academy — site styles */
 
 :root {
   --green-900: #0b3b1e;
@@ -614,15 +614,23 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 .news-split { align-items: center; gap: 56px; }
 .news-media { position: relative; }
 .news-media img { width: 100%; max-height: 520px; object-fit: cover; border-radius: var(--radius); }
+.news-image-pair { display: grid; grid-template-columns: 1.35fr .85fr; gap: 12px; align-items: stretch; }
+.news-image-pair img { min-height: 220px; }
 .news-credit { display: block; margin-top: 9px; color: #b8d9c0; font-size: .72rem; letter-spacing: .04em; }
 .news-copy h2, .news-copy p { color: #f7fff8; }
 .news-copy .eyebrow { color: var(--gold); border-color: rgba(244,196,48,.55); }
 .news-lead { font-size: 1.18rem; max-width: 48ch; }
 .news-copy p:not(.news-lead) { color: #cde4d4; max-width: 52ch; }
 .news-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 22px 0 26px; color: #d9f2df; font-size: .85rem; }
-.news-meta strong { color: var(--gold); }
+	.news-meta strong { color: var(--gold); }
+	.news-note { font-size: .82rem; font-style: italic; }
+	.news-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+	.news-links .text-link { color: var(--gold); font-weight: 700; }
+
 @media (max-width: 760px) {
   .news-split { gap: 30px; }
   .news-media img { max-height: 430px; }
+  .news-image-pair { grid-template-columns: 1fr 1fr; }
+  .news-image-pair img { min-height: 150px; }
   .news-lead { font-size: 1.05rem; }
 }

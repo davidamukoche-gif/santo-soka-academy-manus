@@ -2,7 +2,7 @@
 
 ## Current routing
 
-As of 25 August 2026, the Santo Soka Academy trial-registration form sends validated submissions to the deployed Google Apps Script webhook configured in Manus. The webhook currently delivers messages to **mercurytopsha@gmail.com**. The website does not expose Gmail credentials in the browser; the server reads the webhook configuration from environment variables and sends the registration payload over HTTPS.
+As of 25 August 2026, the Santos Soka Academy trial-registration form sends validated submissions to the deployed Google Apps Script webhook configured in Manus. The webhook currently delivers messages to **mercurytopsha@gmail.com**. The website does not expose Gmail credentials in the browser; the server reads the webhook configuration from environment variables and sends the registration payload over HTTPS.
 
 The public Contact page also uses `mailto:mercurytopsha@gmail.com` for the temporary contact destination. The academy’s official mailbox has not yet replaced this temporary destination.
 
@@ -12,7 +12,7 @@ A clearly marked dummy registration was submitted from the live Manus contact pa
 
 > Thanks! We received your registration and will be in touch soon.
 
-The connected Gmail inbox then received a message with subject **New Santo Soka Academy trial registration**, addressed to `mercurytopsha@gmail.com`, containing the submitted test details. The test message should be deleted or archived manually by the mailbox owner if desired; the application does not delete mailbox data.
+The connected Gmail inbox then received a message with subject **New Santos Soka Academy trial registration**, addressed to `mercurytopsha@gmail.com`, containing the submitted test details. The test message should be deleted or archived manually by the mailbox owner if desired; the application does not delete mailbox data.
 
 ## Configuration locations
 

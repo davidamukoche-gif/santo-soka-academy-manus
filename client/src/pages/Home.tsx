@@ -19,9 +19,9 @@ export default function Home() {
   return (
     <div className="site-shell">
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Santo Soka Academy home">
+        <a className="brand" href="#top" aria-label="Santos Soka Academy home">
           <span className="brand-mark"><img src={markImage} alt="" /></span>
-          <span><strong>SANTO SOKA</strong><small>ACADEMY · NAIROBI</small></span>
+          <span><strong>SANTOS SOKA</strong><small>ACADEMY · NAIROBI</small></span>
         </a>
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Main navigation">
           <a href="#pathway" onClick={() => setMenuOpen(false)}>Pathway</a>
@@ -37,7 +37,7 @@ export default function Home() {
 
       <main id="top">
         <section className="hero">
-          <img className="hero-image" src={heroImage} alt="Young Santo Soka players sprinting on a football pitch" />
+          <img className="hero-image" src={heroImage} alt="Young Santos Soka players sprinting on a football pitch" />
           <div className="hero-overlay" />
           <div className="hero-content">
             <p className="eyebrow light"><span className="eyebrow-dot" /> Dagoretti Green Santos FC · Nairobi</p>
@@ -53,7 +53,7 @@ export default function Home() {
           <div className="section-kicker"><span>01</span><i /> About the academy</div>
           <div className="intro-grid">
             <h2>More than<br /><span>a team.</span></h2>
-            <div className="intro-copy"><p>Santo Soka Academy is the youth arm of Dagoretti Green Santos FC, developing players from Under-6 through the Senior team in the heart of Nairobi.</p><p>We believe the best football education gives a young player both a sharper game and a stronger sense of self.</p><a className="text-link dark" href="#contact">Meet the academy <ChevronRight size={17} /></a></div>
+            <div className="intro-copy"><p>Santos Soka Academy is the youth arm of Dagoretti Green Santos FC, developing players from Under-6 through the Senior team in the heart of Nairobi.</p><p>We believe the best football education gives a young player both a sharper game and a stronger sense of self.</p><a className="text-link dark" href="#contact">Meet the academy <ChevronRight size={17} /></a></div>
           </div>
           <div className="stat-row"><div><strong>U6</strong><span>to Senior</span></div><div><strong>01</strong><span>shared pathway</span></div><div><strong>∞</strong><span>room to grow</span></div></div>
         </section>
@@ -68,12 +68,12 @@ export default function Home() {
           <div className="team-list">{teams.map((team, index) => <article className="team-row" key={team.age}><div className="team-number">0{index + 1}</div><div className="team-age">{team.age}</div><div className="team-info"><h3>{team.title}</h3><p>{team.text}</p></div><ChevronRight className="row-arrow" size={22} /></article>)}</div>
         </section>
 
-        <section className="matchday" id="gallery"><div className="matchday-image"><img src={matchdayImage} alt="Santo Soka player striking the ball during a match" /><div className="matchday-tag">Matchday / 04</div></div><div className="matchday-copy"><p className="eyebrow">04 / In the frame</p><h2>Play with<br /><em>presence.</em></h2><p>Every session is a chance to make the next decision better. Every match is a chance to show what the work has made possible.</p><a className="text-link light" href="#contact">See the academy in action <ChevronRight size={17} /></a></div></section>
+        <section className="matchday" id="gallery"><div className="matchday-image"><img src={matchdayImage} alt="Santos Soka player striking the ball during a match" /><div className="matchday-tag">Matchday / 04</div></div><div className="matchday-copy"><p className="eyebrow">04 / In the frame</p><h2>Play with<br /><em>presence.</em></h2><p>Every session is a chance to make the next decision better. Every match is a chance to show what the work has made possible.</p><a className="text-link light" href="#contact">See the academy in action <ChevronRight size={17} /></a></div></section>
 
         <section className="contact-section" id="contact"><div className="contact-intro"><div className="section-kicker"><span>05</span><i /> Your next move</div><h2>Ready when<br /><em>you are.</em></h2><p>Bring your questions, your ambition, and a pair of boots. Reach out to find the right next step for your player.</p></div><div className="contact-card"><div className="contact-item"><Phone size={19} /><div><small>Call or WhatsApp</small><a href="tel:+254724325653">0724325653</a></div></div><div className="contact-item"><MapPin size={19} /><div><small>Based in</small><strong>Dagoretti, Nairobi</strong></div></div><div className="contact-item"><Instagram size={19} /><div><small>Follow the journey</small><a href="https://www.instagram.com/santos_soka_academy?igsi=MXQ0ZndmcDE0OWwxdA==" target="_blank" rel="noreferrer">@santosokaacademy</a></div></div><a className="button button-lime full" href="mailto:mail@santossokaacademykenya.com">Register for a trial <ArrowUpRight size={17} /></a></div></section>
       </main>
 
-      <footer className="site-footer"><a className="brand" href="#top"><span className="brand-mark"><img src={markImage} alt="" /></span><span><strong>SANTO SOKA</strong><small>ACADEMY · NAIROBI</small></span></a><div className="footer-meta"><span>© 2026 Santo Soka Academy</span><span>Youth arm of Dagoretti Green Santos FC</span></div><div className="footer-icons"><Shield size={19} /><Trophy size={19} /><Users size={19} /></div></footer>
+      <footer className="site-footer"><a className="brand" href="#top"><span className="brand-mark"><img src={markImage} alt="" /></span><span><strong>SANTOS SOKA</strong><small>ACADEMY · NAIROBI</small></span></a><div className="footer-meta"><span>© 2026 Santos Soka Academy</span><span>Youth arm of Dagoretti Green Santos FC</span></div><div className="footer-icons"><Shield size={19} /><Trophy size={19} /><Users size={19} /></div></footer>
     </div>
   );
 }

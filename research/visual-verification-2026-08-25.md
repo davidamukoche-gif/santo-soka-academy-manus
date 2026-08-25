@@ -1,0 +1,5 @@
+# Visual verification — 25 August 2026
+
+The live homepage preview was checked after the branding and story edits. The header, navigation, hero copy, team pathway, and footer visibly use **Santos Soka Academy**. The homepage markdown exposes the county-league, South Sudan, and dedicated Future Stars story sections with their outbound source links. A direct preview of the uploaded South Sudan asset resolved at 1080×1080 and rendered correctly. The visible homepage scroll view showed the South Sudan welcome graphic beside its story copy and source links; the desktop full-page capture also showed the dedicated Future Stars story placement in sequence.
+
+The gallery includes the Andrew Mayom semi-final image, Chadwick Mbayi award image, county-final matchday image, and South Sudan pathway graphic with source links. The remaining gallery blank areas in the full-page screenshot are attributable to lazy-loaded gallery images below the initial viewport, not missing markup; the homepage story asset itself resolved correctly when opened directly.

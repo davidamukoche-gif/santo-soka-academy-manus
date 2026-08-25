@@ -52,7 +52,7 @@ export const appRouter = router({
 
         const [notificationSent, emailForwarded] = await Promise.all([
           notifyOwner({
-            title: "New Santo Soka Academy trial registration",
+            title: "New Santos Soka Academy trial registration",
           content: [
             `Player: ${input.player}`,
             `Date of birth: ${input.dob}`,
