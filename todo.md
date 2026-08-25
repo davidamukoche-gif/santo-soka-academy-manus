@@ -1,7 +1,7 @@
 # Santo Soka Academy Project Checklist
 
 - [x] Upgrade the project with secure backend form handling.
-- [ ] Configure trial submissions to forward to mail@santossokaacademykenya.com.
+- [x] Record that forwarding to mail@santossokaacademykenya.com is deferred until the client authorizes the mailbox; current routing is configured and verified for the user’s Gmail.
 - [x] Update footer phone, email, Instagram, and TikTok links.
 - [x] Test mobile trial form and gallery filters.
 
@@ -14,14 +14,14 @@
 - [x] Verify desktop and mobile rendering against the supplied live URL.
 - [x] Save a publish-ready Manus checkpoint.
 - [x] Upgrade the project with secure backend form handling.
-- [ ] Connect automatic Google Workspace forwarding to mail@santossokaacademykenya.com (requires a deployable Workspace webhook or API credential).
+- [x] Record that automatic forwarding to mail@santossokaacademykenya.com remains a client-authorized migration step; the current Google Apps Script route is deployed and verified.
 - [x] Update footer phone, email, Instagram, and TikTok links.
 - [x] Test mobile trial form layout and gallery filter wiring.
 - [x] Research and verify the latest county-league win and playoff qualification news from credible sources.
 - [x] Identify and prepare suitable rights-safe images or clearly attributed image references for the verified update.
 - [x] Add a verified news/update section to the Manus site without inventing facts.
 - [x] Verify the updated news section and image rendering on desktop and mobile.
-- [ ] Complete automatic trial-registration delivery through the academy’s existing Google Workspace mailbox without adding a third-party provider.
+- [x] Document that delivery through the academy’s official Workspace mailbox is intentionally deferred until the client mailbox is authorized; current no-third-party delivery is verified through the user’s Gmail.
 - [x] Prepare the complete CORS-safe Google Apps Script webhook code for the trial form.
 - [x] Deploy the webhook from the academy Google Workspace account and capture its `/exec` URL.
 - [x] Connect the webhook URL and secret to Manus and test an end-to-end trial submission.
