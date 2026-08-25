@@ -21,3 +21,14 @@
 - [x] Identify and prepare suitable rights-safe images or clearly attributed image references for the verified update.
 - [x] Add a verified news/update section to the Manus site without inventing facts.
 - [x] Verify the updated news section and image rendering on desktop and mobile.
+- [ ] Complete automatic trial-registration delivery through the academy’s existing Google Workspace mailbox without adding a third-party provider.
+- [x] Prepare the complete CORS-safe Google Apps Script webhook code for the trial form.
+- [x] Deploy the webhook from the academy Google Workspace account and capture its `/exec` URL.
+- [x] Connect the webhook URL and secret to Manus and test an end-to-end trial submission.
+- [x] Confirm that the current website flow forwards trial registrations only; general contact messages are not a separate form.
+- [x] Connect the published website submission flow to the authorized Gmail mailbox without exposing credentials.
+- [x] Test the website-to-Gmail delivery flow and document any remaining authorization or webhook dependency.
+- [x] Connect trial registrations to the user’s current Gmail account first.
+- [x] Add a contact-email action that uses the current Gmail destination.
+- [x] Document the later switch from the user’s Gmail destination to the client’s mailbox.
+- [x] Diagnose and resolve the failed Google Apps Script authorization or deployment before connecting Gmail delivery.

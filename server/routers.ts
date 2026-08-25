@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { z } from "zod";
 import { createTrialRegistration } from "./db";
 import { notifyOwner } from "./_core/notification";
+import { forwardTrialRegistrationToGoogleWorkspace } from "./googleWorkspace";
 import { publicProcedure, router } from "./_core/trpc";
 
 export const trialRegistrationInput = z.object({
@@ -49,8 +50,9 @@ export const appRouter = router({
           message: input.message || null,
         });
 
-        const notificationSent = await notifyOwner({
-          title: "New Santo Soka Academy trial registration",
+        const [notificationSent, emailForwarded] = await Promise.all([
+          notifyOwner({
+            title: "New Santo Soka Academy trial registration",
           content: [
             `Player: ${input.player}`,
             `Date of birth: ${input.dob}`,
@@ -60,11 +62,25 @@ export const appRouter = router({
             `Email: ${input.email || "Not provided"}`,
             `Message: ${input.message || "Not provided"}`,
             `Registration ID: ${registration.id}`,
-            "Intended forwarding destination: mail@santossokaacademykenya.com",
-          ].join("\n"),
-        });
+              "Intended forwarding destination: current Google Workspace mailbox",
+            ].join("\n"),
+          }),
+          forwardTrialRegistrationToGoogleWorkspace({
+            player: input.player,
+            dob: input.dob,
+            category: input.category,
+            parent: input.parent,
+            phone: input.phone,
+            email: input.email || undefined,
+            message: input.message || undefined,
+          }),
+        ]);
 
-        return { success: true as const, notificationSent };
+        if (!emailForwarded) {
+          console.warn("[Trials] Stored registration but Gmail forwarding was unavailable");
+        }
+
+        return { success: true as const, notificationSent, emailForwarded };
       }),
   }),
 });

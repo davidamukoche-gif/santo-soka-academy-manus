@@ -7,4 +7,6 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
+  googleWorkspaceWebhookUrl: process.env.GOOGLE_WORKSPACE_WEBHOOK_URL ?? "",
+  googleWorkspaceWebhookSecret: process.env.GOOGLE_WORKSPACE_WEBHOOK_SECRET ?? "",
 };
