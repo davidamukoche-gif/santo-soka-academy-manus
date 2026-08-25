@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Senior Players — Santos Soka Academy</title>
+    <meta name="description" content="Meet the Santos Soka Academy senior players registered for the next season." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/jpeg" href="/manus-storage/crest_48b5cf38.jpg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav">
+        <a href="/" class="brand">
+          <div class="brand-badge"><img src="/manus-storage/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+          <div class="brand-name">Santos Soka Academy<small>Dagoretti • Nairobi</small></div>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">≡</button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/teams.html">Teams</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/senior-players.html" class="active">Senior players</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/contact.html" class="cta-btn">Join Trials</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="crumbs"><a href="/">Home</a> / Senior Players</div>
+        <h1>Senior players</h1>
+        <p>Meet the Santos Soka players registered for the upcoming season.</p>
+      </div>
+    </section>
+
+    <main class="container roster-page" data-roster-page="public">
+      <div class="roster-toolbar">
+        <div>
+          <span class="eyebrow" style="color:var(--green-700); border-color: rgba(15,107,50,0.35);">Next season</span>
+          <h2 id="season-heading">2026/27 squad</h2>
+        </div>
+        <label class="season-picker">Season <select id="season"><option value="2026/27">2026/27</option><option value="2027/28">2027/28</option></select></label>
+      </div>
+      <div id="roster-status" class="form-msg" role="status" aria-live="polite"></div>
+      <div id="roster" class="roster-grid" aria-live="polite"></div>
+      <div id="roster-empty" class="empty-state" hidden>No senior players have been registered for this season yet.</div>
+      <div class="roster-admin-link"><a class="btn btn-primary" href="/manage-senior-players.html">Manage the senior register →</a></div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom"><div>© <span id="year"></span> Santos Soka Academy.</div><div>Proudly based in Dagoretti, Nairobi 🇰🇪</div></div>
+      </div>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/senior-roster.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  </body>
+</html>

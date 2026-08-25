@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { and, asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertTrialRegistration, InsertUser, trialRegistrations, users } from "../drizzle/schema";
+import { InsertSeniorPlayer, InsertTrialRegistration, InsertUser, seniorPlayers, trialRegistrations, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -97,5 +97,42 @@ export async function createTrialRegistration(input: InsertTrialRegistration) {
 
   const result = await db.insert(trialRegistrations).values(input);
   return { id: Number(result[0].insertId) };
+}
+
+export async function listSeniorPlayers(season: string, publishedOnly = true) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  return db
+    .select()
+    .from(seniorPlayers)
+    .where(
+      publishedOnly
+        ? and(eq(seniorPlayers.season, season), eq(seniorPlayers.isPublished, 1))
+        : eq(seniorPlayers.season, season),
+    )
+    .orderBy(asc(seniorPlayers.displayOrder), desc(seniorPlayers.createdAt));
+}
+
+export async function createSeniorPlayer(input: InsertSeniorPlayer) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  const result = await db.insert(seniorPlayers).values(input);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function deleteSeniorPlayer(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  await db.delete(seniorPlayers).where(eq(seniorPlayers.id, id));
+  return { success: true as const };
 }
 

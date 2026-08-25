@@ -39,3 +39,19 @@ export const trialRegistrations = mysqlTable("trialRegistrations", {
 
 export type TrialRegistration = typeof trialRegistrations.$inferSelect;
 export type InsertTrialRegistration = typeof trialRegistrations.$inferInsert;
+
+export const seniorPlayers = mysqlTable("seniorPlayers", {
+  id: int("id").autoincrement().primaryKey(),
+  season: varchar("season", { length: 20 }).notNull(),
+  playerName: varchar("playerName", { length: 160 }).notNull(),
+  position: varchar("position", { length: 60 }).notNull(),
+  imageKey: varchar("imageKey", { length: 512 }).notNull(),
+  imageUrl: varchar("imageUrl", { length: 512 }).notNull(),
+  displayOrder: int("displayOrder").default(0).notNull(),
+  isPublished: int("isPublished").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SeniorPlayer = typeof seniorPlayers.$inferSelect;
+export type InsertSeniorPlayer = typeof seniorPlayers.$inferInsert;

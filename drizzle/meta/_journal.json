@@ -8,6 +8,13 @@
       "when": 1787597999562,
       "tag": "0000_watery_corsair",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1787687825107,
+      "tag": "0001_far_redwing",
+      "breakpoints": true
     }
   ]
 }

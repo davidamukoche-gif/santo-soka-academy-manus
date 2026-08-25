@@ -45,3 +45,11 @@
 - [x] Add approved South Sudan pathway image(s) to the appropriate About/news/gallery locations and retain source credits.
 - [x] Add a dedicated Futurestars story section with explicit verified milestones, visible credits, and outbound source links.
 - [x] Re-verify the Futurestars and Santos branding changes on desktop and mobile, then save a corrected checkpoint.
+
+- [x] Add a next-season senior-player roster data model with name, position, image URL/key, season, display order, and timestamps.
+- [x] Add authenticated management procedures and a responsive roster-management form with image upload validation.
+- [x] Add a public senior-player roster page and navigation entry for the upcoming season.
+- [x] Test create/list/error states, image storage references, mobile layout, and save a checkpoint.
+- [x] Wire the management-page sign-in button to the project’s secure OAuth start flow.
+- [ ] Verify an authorized admin can create a roster entry, resolve its stored image, view it publicly, and remove it without retaining test data; this requires the academy administrator’s authenticated session.
+- [ ] Save a final checkpoint after the authorized senior-player roster flow is verified.

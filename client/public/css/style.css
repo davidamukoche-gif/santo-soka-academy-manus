@@ -634,3 +634,36 @@ form.contact textarea { min-height: 120px; resize: vertical; }
   .news-image-pair img { min-height: 150px; }
   .news-lead { font-size: 1.05rem; }
 }
+
+/* Senior-player roster */
+.roster-page { padding-top: 56px; padding-bottom: 72px; }
+.roster-toolbar { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+.roster-toolbar h2 { margin-bottom: 0; }
+.season-picker { display: grid; gap: 5px; color: var(--muted); font-weight: 700; font-size: .85rem; }
+.season-picker select, .player-form select, .player-form input { min-height: 46px; }
+.roster-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.roster-card { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+.roster-card > img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #e9f2ea; }
+.roster-card-body { padding: 16px; }
+.roster-card-body h3 { margin: 10px 0 2px; }
+.roster-card-body p { color: var(--muted); font-size: .85rem; margin-bottom: 0; }
+.roster-admin-link { margin-top: 34px; text-align: center; }
+.empty-state, .admin-gate { padding: 36px; border: 1px dashed #b8cdbb; border-radius: var(--radius); text-align: center; background: #fff; }
+.player-form { display: grid; gap: 18px; max-width: 820px; padding: 26px; margin-bottom: 48px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+.player-form label { display: grid; gap: 6px; font-weight: 700; color: var(--green-900); }
+.field-hint { color: var(--muted); font-size: .78rem; font-weight: 400; }
+.form-msg.show { margin: 0; padding: 10px 12px; border-radius: 8px; background: #eef7ef; color: var(--green-900); }
+.form-msg.error { background: #fff0f0; color: #8a1f1f; }
+.form-msg.success { background: #e7f7eb; color: var(--green-900); }
+.roster-list-heading { margin-top: 10px; }
+.roster-delete { margin-top: 12px; padding: 7px 10px; border: 0; border-radius: 7px; background: #fff0f0; color: #8a1f1f; font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.roster-delete:hover { background: #ffe0e0; }
+@media (max-width: 900px) { .roster-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .roster-page { padding-top: 36px; }
+  .roster-toolbar { align-items: start; flex-direction: column; }
+  .roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .roster-card-body { padding: 12px; }
+  .roster-card-body h3 { font-size: 1rem; }
+  .player-form { padding: 18px; }
+}
