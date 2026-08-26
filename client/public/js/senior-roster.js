@@ -104,8 +104,11 @@
   };
 
   seasonSelect?.addEventListener("change", loadRoster);
+  const AUTH_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
+
   document.querySelector("#login-button")?.addEventListener("click", () => {
-    window.location.href = "/api/oauth/start";
+    const returnTo = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    window.location.href = `${AUTH_ORIGIN}/api/oauth/start?returnTo=${encodeURIComponent(returnTo)}`;
   });
 
   document.querySelector("#player-form")?.addEventListener("submit", async (event) => {

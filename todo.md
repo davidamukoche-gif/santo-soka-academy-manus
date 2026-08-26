@@ -75,3 +75,4 @@
 - [x] Ensure preview login starts on the published allowlisted origin so the host-only OAuth nonce cookie matches the callback host.
 - [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
 - [x] Add focused coverage for preview login origin compatibility before the final authentication checkpoint.
+- [x] Route the static administrator login button through the same published OAuth origin as the React user login so preview cookies match the callback host.
