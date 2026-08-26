@@ -62,7 +62,7 @@
 - [x] Verify public/admin separation and save a corrected checkpoint.
 - [x] Save a new checkpoint after the OAuth redirect fix and public-link removal.
 - [x] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.
-- [ ] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
+- [x] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
 - [ ] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
 - [ ] Save a corrected checkpoint after successful published OAuth verification.
 - [ ] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
@@ -81,3 +81,10 @@
 - [x] Keep ordinary users unable to self-promote or access admin mutations, and verify the account-control behavior responsively.
 - [x] Add WhatsApp chat actions using `0724325653` to the public contact surfaces and shared pages.
 - [x] Verify the WhatsApp links use the correct international number and remain usable on desktop and mobile.
+
+- [x] Reproduce the reported missing sign-in option in the user’s browser across desktop navigation, mobile navigation, and the protected management page.
+- [x] Reproduce the reported missing WhatsApp chat action across the published homepage and Contact page.
+- [ ] Fix any navigation/session or WhatsApp rendering/interaction issue found, then verify responsive behavior and publish a checkpoint.
+- [ ] Reproduce the missing sign-in/account control on the published site in a mobile viewport and capture the mobile navigation state.
+- [ ] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
+- [ ] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.

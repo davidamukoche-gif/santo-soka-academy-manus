@@ -1,7 +1,7 @@
 // Santos Soka Academy — small interactions
 
 // Mobile nav toggle
-document.addEventListener("DOMContentLoaded", () => {
+const initializeSantosInteractions = () => {
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
   if (toggle && links) {
@@ -188,4 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     stats.forEach((s) => io.observe(s));
   }
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeSantosInteractions, { once: true });
+} else {
+  initializeSantosInteractions();
+}
