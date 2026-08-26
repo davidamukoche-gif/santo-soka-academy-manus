@@ -18,6 +18,89 @@ document.addEventListener("DOMContentLoaded", () => {
     if (href === path) a.classList.add("active");
   });
 
+  // WhatsApp chat shortcut for quick parent/player enquiries.
+  if (!document.querySelector(".whatsapp-float")) {
+    const whatsapp = document.createElement("a");
+    whatsapp.className = "whatsapp-float";
+    whatsapp.href = "https://wa.me/254724325653?text=Hello%20Santos%20Soka%20Academy%2C%20I%20would%20like%20to%20make%20an%20enquiry.";
+    whatsapp.target = "_blank";
+    whatsapp.rel = "noopener";
+    whatsapp.setAttribute("aria-label", "Chat with Santos Soka Academy on WhatsApp");
+    whatsapp.textContent = "WhatsApp us";
+    document.body.appendChild(whatsapp);
+  }
+
+  // Account control: public pages show sign-in state, and only an authenticated
+  // admin receives the roster-management action. Authorization remains enforced
+  // server-side by adminProcedure; this is only a convenient navigation surface.
+  const navLinks = document.querySelector(".nav-links");
+  if (navLinks && !navLinks.querySelector(".account-nav")) {
+    const AUTH_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
+    const accountItem = document.createElement("li");
+    accountItem.className = "account-nav";
+    const accountBox = document.createElement("span");
+    accountBox.className = "account-box";
+    accountBox.textContent = "Checking account…";
+    accountItem.appendChild(accountBox);
+    navLinks.insertBefore(accountItem, navLinks.lastElementChild);
+
+    const authStartUrl = () => `${AUTH_ORIGIN}/api/oauth/start?returnTo=${encodeURIComponent(`${window.location.pathname}${window.location.search}${window.location.hash}`)}`;
+    const rpcAuth = async (procedure, method = "GET") => {
+      const response = await fetch(`/api/trpc/${procedure}${method === "GET" ? `?input=${encodeURIComponent(JSON.stringify({ json: null }))}` : "?batch=1"}`, {
+        method,
+        credentials: "same-origin",
+        headers: method === "POST" ? { "content-type": "application/json" } : undefined,
+        body: method === "POST" ? JSON.stringify({ 0: { json: null } }) : undefined,
+      });
+      const body = await response.json().catch(() => null);
+      if (!response.ok) throw new Error("Authentication request failed");
+      return body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? null;
+    };
+
+    const renderAccount = (user) => {
+      accountBox.innerHTML = "";
+      if (!user) {
+        const signIn = document.createElement("a");
+        signIn.className = "account-link";
+        signIn.href = authStartUrl();
+        signIn.textContent = "Sign in";
+        accountBox.appendChild(signIn);
+        return;
+      }
+
+      const label = document.createElement("span");
+      label.className = "account-label";
+      label.textContent = `Signed in: ${user.name || user.email || "Account"}`;
+      accountBox.appendChild(label);
+
+      if (user.role === "admin") {
+        const adminLink = document.createElement("a");
+        adminLink.className = "account-link account-admin";
+        adminLink.href = "/manage-senior-players.html";
+        adminLink.textContent = "Admin dashboard";
+        accountBox.appendChild(adminLink);
+      }
+
+      const logout = document.createElement("button");
+      logout.className = "account-logout";
+      logout.type = "button";
+      logout.textContent = "Sign out";
+      logout.addEventListener("click", async () => {
+        logout.disabled = true;
+        try {
+          await rpcAuth("auth.logout", "POST");
+          window.location.reload();
+        } catch {
+          logout.disabled = false;
+          logout.textContent = "Try again";
+        }
+      });
+      accountBox.appendChild(logout);
+    };
+
+    rpcAuth("auth.me").then(renderAccount).catch(() => renderAccount(null));
+  }
+
   // Secure trial registration submission.
   const form = document.querySelector("form.contact");
   if (form) {

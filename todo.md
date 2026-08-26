@@ -76,3 +76,8 @@
 - [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
 - [x] Add focused coverage for preview login origin compatibility before the final authentication checkpoint.
 - [x] Route the static administrator login button through the same published OAuth origin as the React user login so preview cookies match the callback host.
+- [x] Add an easy in-site account control that shows sign-in/sign-out state across public pages.
+- [x] Show the senior-player management action automatically only when `auth.me` confirms the signed-in user has the admin role.
+- [x] Keep ordinary users unable to self-promote or access admin mutations, and verify the account-control behavior responsively.
+- [x] Add WhatsApp chat actions using `0724325653` to the public contact surfaces and shared pages.
+- [x] Verify the WhatsApp links use the correct international number and remain usable on desktop and mobile.
