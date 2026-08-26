@@ -12,29 +12,37 @@ function getQueryParam(req: Request, key: string): string | undefined {
 }
 
 const APPROVED_PUBLIC_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
+const APPROVED_PUBLIC_HOSTS = new Set([
+  "santosoka-dqvkmaei.manus.space",
+  "santossokaacademy.co.ke",
+  "www.santossokaacademy.co.ke",
+]);
+const DEFAULT_ADMIN_RETURN_PATH = "/manage-senior-players.html";
 
-function getPublicOrigin(req: Request): string {
+export function getSessionDisplayName(userInfo: { name?: string | null; email?: string | null; openId: string }): string {
+  return userInfo.name?.trim() || userInfo.email?.trim() || userInfo.openId;
+}
+
+function getSafeReturnPath(req: Request): string {
+  const candidate = getQueryParam(req, "returnTo");
+  if (!candidate || !candidate.startsWith("/") || candidate.startsWith("//") || candidate.includes("\\")) {
+    return DEFAULT_ADMIN_RETURN_PATH;
+  }
+  return candidate;
+}
+
+export function getPublicOrigin(req: Request): string {
   const forwardedHost = req.get("x-forwarded-host")?.split(",")[0]?.trim();
   const requestHost = forwardedHost || req.get("host") || "";
+  const hostname = requestHost.replace(/:\d+$/, "").toLowerCase();
   const requestProtocol = (req.get("x-forwarded-proto") || req.protocol).split(",")[0].trim();
 
-  // Manus production can expose an internal Cloud Run host to Express. Prefer
-  // the browser's public origin when available, otherwise use the allowlisted
-  // project domain rather than sending an invalid redirect_uri to OAuth.
-  if (requestHost.endsWith(".a.run.app")) {
-    const referer = req.get("referer");
-    if (referer) {
-      try {
-        const refererOrigin = new URL(referer).origin;
-        if (refererOrigin.endsWith(".manus.space")) return refererOrigin;
-      } catch {
-        // Fall through to the approved project origin.
-      }
-    }
-    return APPROVED_PUBLIC_ORIGIN;
-  }
+  // OAuth redirect URIs are allowlisted by the Manus application. Internal
+  // Cloud Run hosts, preview hosts, and localhost must never be sent to OAuth.
+  if (!APPROVED_PUBLIC_HOSTS.has(hostname)) return APPROVED_PUBLIC_ORIGIN;
 
-  return `${requestProtocol}://${requestHost}`;
+  const protocol = hostname.endsWith("manus.space") ? "https" : requestProtocol || "https";
+  return `${protocol}://${requestHost}`;
 }
 
 export function registerOAuthRoutes(app: Express) {
@@ -46,7 +54,8 @@ export function registerOAuthRoutes(app: Express) {
 
     const nonce = crypto.randomUUID();
     const redirectUri = `${getPublicOrigin(req)}/api/oauth/callback`;
-    const state = encodeOAuthState({ redirectUri, nonce });
+    const returnTo = getSafeReturnPath(req);
+    const state = encodeOAuthState({ redirectUri, nonce, returnTo });
     res.cookie(OAUTH_STATE_COOKIE, nonce, { path: "/", maxAge: 600_000, sameSite: "none", secure: true });
 
     const url = new URL(`${ENV.oauthPortalUrl.replace(/\/$/, "")}/app-auth`);
@@ -69,7 +78,8 @@ export function registerOAuthRoutes(app: Express) {
     // CSRF guard: the nonce in `state` must match the one-time cookie that
     // startLogin set in the browser that began this login. An attacker can
     // forge `state`, but cannot plant this cookie in the victim's browser.
-    const { nonce } = decodeOAuthState(state);
+    const oauthState = decodeOAuthState(state);
+    const { nonce } = oauthState;
     const expectedNonce = parseCookieHeader(req.headers.cookie ?? "")[OAUTH_STATE_COOKIE];
     if (!nonce || nonce !== expectedNonce) {
       res.status(403).json({ error: "invalid oauth state" });
@@ -95,14 +105,14 @@ export function registerOAuthRoutes(app: Express) {
       });
 
       const sessionToken = await sdk.createSessionToken(userInfo.openId, {
-        name: userInfo.name || "",
+        name: getSessionDisplayName(userInfo),
         expiresInMs: ONE_YEAR_MS,
       });
 
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, "/manage-senior-players.html");
+      res.redirect(302, oauthState.returnTo || DEFAULT_ADMIN_RETURN_PATH);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       res.status(500).json({ error: "OAuth callback failed" });

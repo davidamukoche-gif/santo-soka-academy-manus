@@ -55,10 +55,23 @@
 - [ ] Save a final checkpoint after the authorized senior-player roster flow is verified.
 - [x] Acquire the user-provided official Instagram image for Wall Kong and preserve its source link for attribution.
 - [x] Add Wall Kong to the 2026/27 senior register as a midfielder and verify the image resolves on the public roster.
-- [ ] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.
+- [x] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.
 - [x] Preserve Wall Kong’s original Instagram post URL in project research and add a visible source note/link for the roster image.
 - [x] Fix the published admin OAuth redirect so it uses the approved Santos Soka Manus domain and no temporary Cloud Run hostname.
 - [x] Remove the manage-roster link from the public senior-player page while keeping the direct admin URL protected.
 - [x] Verify public/admin separation and save a corrected checkpoint.
-- [ ] Save a new checkpoint after the OAuth redirect fix and public-link removal.
-- [ ] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.
+- [x] Save a new checkpoint after the OAuth redirect fix and public-link removal.
+- [x] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.
+- [ ] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
+- [ ] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
+- [ ] Save a corrected checkpoint after successful published OAuth verification.
+- [ ] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
+- [ ] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
+- [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
+- [ ] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are implemented, but browser sign-in remains pending.
+- [x] Add or update automated authentication tests and verify the management-page role gate.
+- [ ] Verify login behavior in the browser and save a corrected checkpoint; requires the authorized Manus session to complete sign-in.
+- [ ] Reproduce ordinary-user login separately on preview and published domains and record the actual result.
+- [x] Ensure preview login starts on the published allowlisted origin so the host-only OAuth nonce cookie matches the callback host.
+- [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
+- [x] Add focused coverage for preview login origin compatibility before the final authentication checkpoint.
