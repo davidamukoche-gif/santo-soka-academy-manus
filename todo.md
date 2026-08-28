@@ -68,7 +68,7 @@
 - [ ] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
 - [ ] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
 - [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
-- [ ] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are implemented, but browser sign-in remains pending.
+- [x] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are complete, with browser sign-in still pending.
 - [x] Add or update automated authentication tests and verify the management-page role gate.
 - [ ] Verify login behavior in the browser and save a corrected checkpoint; requires the authorized Manus session to complete sign-in.
 - [ ] Reproduce ordinary-user login separately on preview and published domains and record the actual result.
@@ -84,7 +84,10 @@
 
 - [x] Reproduce the reported missing sign-in option in the user’s browser across desktop navigation, mobile navigation, and the protected management page.
 - [x] Reproduce the reported missing WhatsApp chat action across the published homepage and Contact page.
-- [ ] Fix any navigation/session or WhatsApp rendering/interaction issue found, then verify responsive behavior and publish a checkpoint.
+- [x] Fix any navigation/session or WhatsApp rendering/interaction issue found, then verify responsive behavior and publish a checkpoint.
 - [ ] Reproduce the missing sign-in/account control on the published site in a mobile viewport and capture the mobile navigation state.
-- [ ] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
-- [ ] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
+- [x] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
+- [x] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
+- [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
+- [ ] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
+- [ ] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them at Truehost, and verifying HTTPS after propagation.
