@@ -91,3 +91,8 @@
 - [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
 - [ ] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
 - [ ] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them at Truehost, and verifying HTTPS after propagation.
+- [x] Diagnose why the custom-domain connection for `santossokaacademy.co.ke` is not working and record the current Manus domain state.
+- [x] Check DNS resolution, HTTPS, and routing for the apex and `www` domain.
+- [ ] Apply or clearly document the exact DNS correction required at Truehost, then verify the live domain and update the checklist.
+- [ ] Prepare a step-by-step Truehost → Cloudflare → Manus connection guide for `santossokaacademy.co.ke`.
+- [ ] Document the exact current DNS diagnosis, safe record replacement rules, HTTPS settings, and propagation checks without guessing Manus apex values.
