@@ -51,8 +51,8 @@
 - [x] Add a public senior-player roster page and navigation entry for the upcoming season.
 - [x] Test create/list/error states, image storage references, mobile layout, and save a checkpoint.
 - [x] Wire the management-page sign-in button to the project’s secure OAuth start flow.
-- [ ] Verify an authorized admin can create a roster entry, resolve its stored image, view it publicly, and remove it without retaining test data; this requires the academy administrator’s authenticated session.
-- [ ] Save a final checkpoint after the authorized senior-player roster flow is verified.
+- [x] Verify an authorized admin can create a roster entry, resolve its stored image, view it publicly, and remove it without retaining test data.
+- [x] Save a final checkpoint after the authorized senior-player roster flow is verified.
 - [x] Acquire the user-provided official Instagram image for Wall Kong and preserve its source link for attribution.
 - [x] Add Wall Kong to the 2026/27 senior register as a midfielder and verify the image resolves on the public roster.
 - [x] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.
@@ -63,14 +63,14 @@
 - [x] Save a new checkpoint after the OAuth redirect fix and public-link removal.
 - [x] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.
 - [x] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
-- [ ] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
-- [ ] Save a corrected checkpoint after successful published OAuth verification.
+- [x] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
+- [x] Save a corrected checkpoint after successful published OAuth verification.
 - [x] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
 - [x] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
 - [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
 - [x] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are complete, with browser sign-in still pending.
 - [x] Add or update automated authentication tests and verify the management-page role gate.
-- [ ] Verify login behavior in the browser and save a corrected checkpoint; requires the authorized Manus session to complete sign-in.
+- [x] Verify login behavior in the browser and save a corrected checkpoint with the authorized Manus session.
 - [ ] Reproduce ordinary-user login separately on preview and published domains and record the actual result.
 - [x] Ensure preview login starts on the published allowlisted origin so the host-only OAuth nonce cookie matches the callback host.
 - [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
@@ -89,7 +89,7 @@
 - [x] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
 - [x] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
 - [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
-- [ ] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
+- [x] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
 - [x] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them through the authoritative Cloudflare DNS zone, and verifying HTTPS after propagation.
 - [x] Diagnose why the custom-domain connection for `santossokaacademy.co.ke` is not working and record the current Manus domain state.
 - [x] Check DNS resolution, HTTPS, and routing for the apex and `www` domain.
