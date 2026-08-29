@@ -96,3 +96,7 @@
 - [x] Clearly document the exact DNS correction required at the authoritative DNS provider and verify the live apex after the user’s DNS change.
 - [x] Prepare a step-by-step Truehost → Cloudflare → Manus connection guide for `santossokaacademy.co.ke`.
 - [x] Document the exact current DNS diagnosis, safe record replacement rules, HTTPS settings, and propagation checks without guessing Manus apex values.
+
+- [x] Add a homepage meta keywords tag containing between 3 and 8 focused keywords, with the upper bound never exceeded.
+- [x] Audit all images rendered at `/` and add meaningful alt text to every image currently missing it.
+- [x] Verify the homepage keywords quantity and confirm no rendered homepage image lacks an alt attribute, then run tests and build.
