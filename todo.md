@@ -65,8 +65,8 @@
 - [x] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
 - [ ] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
 - [ ] Save a corrected checkpoint after successful published OAuth verification.
-- [ ] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
-- [ ] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
+- [x] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
+- [x] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
 - [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
 - [x] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are complete, with browser sign-in still pending.
 - [x] Add or update automated authentication tests and verify the management-page role gate.
@@ -90,9 +90,9 @@
 - [x] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
 - [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
 - [ ] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
-- [ ] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them at Truehost, and verifying HTTPS after propagation.
+- [x] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them through the authoritative Cloudflare DNS zone, and verifying HTTPS after propagation.
 - [x] Diagnose why the custom-domain connection for `santossokaacademy.co.ke` is not working and record the current Manus domain state.
 - [x] Check DNS resolution, HTTPS, and routing for the apex and `www` domain.
-- [ ] Apply or clearly document the exact DNS correction required at Truehost, then verify the live domain and update the checklist.
-- [ ] Prepare a step-by-step Truehost → Cloudflare → Manus connection guide for `santossokaacademy.co.ke`.
-- [ ] Document the exact current DNS diagnosis, safe record replacement rules, HTTPS settings, and propagation checks without guessing Manus apex values.
+- [x] Clearly document the exact DNS correction required at the authoritative DNS provider and verify the live apex after the user’s DNS change.
+- [x] Prepare a step-by-step Truehost → Cloudflare → Manus connection guide for `santossokaacademy.co.ke`.
+- [x] Document the exact current DNS diagnosis, safe record replacement rules, HTTPS settings, and propagation checks without guessing Manus apex values.
