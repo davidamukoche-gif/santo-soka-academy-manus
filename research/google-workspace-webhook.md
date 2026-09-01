@@ -10,4 +10,4 @@ Sources:
 
 ## Editor progress
 
-A corrected 54-line webhook source was inserted into the signed-in Google Apps Script editor for the personal Google account `mercurytopsha@gmail.com`. The source uses `doPost(e)`, validates the current trial form fields, checks the optional `WEBHOOK_SECRET` script property, and sends to `mail@santossokaacademykenya.com` with `MailApp.sendEmail`. The editor model now ends with the `jsonResponse` function and no extra closing brace.
+A corrected 54-line webhook source was inserted into the signed-in Google Apps Script editor for the personal Google account `santossokaacademykenya@gmail.com`. The source uses `doPost(e)`, validates the current trial form fields, checks the optional `WEBHOOK_SECRET` script property, and sends to `mail@santossokaacademykenya.com` with `MailApp.sendEmail`. The editor model now ends with the `jsonResponse` function and no extra closing brace.
