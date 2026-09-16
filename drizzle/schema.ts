@@ -55,3 +55,21 @@ export const seniorPlayers = mysqlTable("seniorPlayers", {
 
 export type SeniorPlayer = typeof seniorPlayers.$inferSelect;
 export type InsertSeniorPlayer = typeof seniorPlayers.$inferInsert;
+
+export const fixtures = mysqlTable("fixtures", {
+  id: int("id").autoincrement().primaryKey(),
+  fixtureDate: varchar("fixtureDate", { length: 10 }).notNull(),
+  fixtureTime: varchar("fixtureTime", { length: 5 }).notNull(),
+  team: varchar("team", { length: 40 }).notNull(),
+  opponent: varchar("opponent", { length: 160 }).notNull(),
+  venue: varchar("venue", { length: 80 }).notNull(),
+  competition: varchar("competition", { length: 120 }).notNull(),
+  status: mysqlEnum("status", ["Upcoming", "FT", "Postponed"]).default("Upcoming").notNull(),
+  score: varchar("score", { length: 20 }),
+  scorers: text("scorers"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Fixture = typeof fixtures.$inferSelect;
+export type InsertFixture = typeof fixtures.$inferInsert;

@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { z } from "zod";
-import { createSeniorPlayer, createTrialRegistration, deleteSeniorPlayer, listSeniorPlayers } from "./db";
+import { createFixture, createSeniorPlayer, createTrialRegistration, deleteFixture, deleteSeniorPlayer, listFixtures, listSeniorPlayers } from "./db";
 import { forwardTrialRegistrationToGoogleWorkspace } from "./googleWorkspace";
 import { adminProcedure, publicProcedure, router } from "./_core/trpc";
 import { storagePut } from "./storage";
@@ -22,6 +22,18 @@ const DEFAULT_SENIOR_SEASON = "2026/27";
 
 const seniorSeasonInput = z.string().trim().min(4).max(20);
 const seniorPlayerImageInput = z.string().trim().regex(/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=\s]+$/).max(7_000_000);
+
+export const fixtureCreateInput = z.object({
+  fixtureDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  fixtureTime: z.string().regex(/^\d{2}:\d{2}$/),
+  team: z.string().trim().min(2).max(40),
+  opponent: z.string().trim().min(2).max(160),
+  venue: z.string().trim().min(2).max(80),
+  competition: z.string().trim().min(2).max(120),
+  status: z.enum(["Upcoming", "FT", "Postponed"]).default("Upcoming"),
+  score: z.string().trim().max(20).optional().or(z.literal("")),
+  scorers: z.array(z.string().trim().min(1).max(120)).max(12).default([]),
+});
 
 export const seniorPlayerCreateInput = z.object({
   season: seniorSeasonInput.default(DEFAULT_SENIOR_SEASON),
@@ -90,6 +102,32 @@ export const appRouter = router({
     remove: adminProcedure
       .input(z.object({ id: z.number().int().positive() }))
       .mutation(({ input }) => deleteSeniorPlayer(input.id)),
+  }),
+
+  fixtures: router({
+    list: publicProcedure.query(async () => {
+      const rows = await listFixtures();
+      return rows.map((row) => ({
+        ...row,
+        scorers: row.scorers ? JSON.parse(row.scorers) : [],
+      }));
+    }),
+    create: adminProcedure
+      .input(fixtureCreateInput)
+      .mutation(({ input }) => createFixture({
+        fixtureDate: input.fixtureDate,
+        fixtureTime: input.fixtureTime,
+        team: input.team,
+        opponent: input.opponent,
+        venue: input.venue,
+        competition: input.competition,
+        status: input.status,
+        score: input.score || null,
+        scorers: JSON.stringify(input.scorers),
+      })),
+    remove: adminProcedure
+      .input(z.object({ id: z.number().int().positive() }))
+      .mutation(({ input }) => deleteFixture(input.id)),
   }),
 
   trials: router({

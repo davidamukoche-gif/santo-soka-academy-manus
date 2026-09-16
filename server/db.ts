@@ -1,6 +1,6 @@
 import { and, asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertSeniorPlayer, InsertTrialRegistration, InsertUser, seniorPlayers, trialRegistrations, users } from "../drizzle/schema";
+import { InsertFixture, InsertSeniorPlayer, InsertTrialRegistration, InsertUser, fixtures, seniorPlayers, trialRegistrations, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -136,3 +136,25 @@ export async function deleteSeniorPlayer(id: number) {
   return { success: true as const };
 }
 
+export async function listFixtures() {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  return db.select().from(fixtures).orderBy(asc(fixtures.fixtureDate), asc(fixtures.fixtureTime), asc(fixtures.id));
+}
+
+export async function createFixture(input: InsertFixture) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  const result = await db.insert(fixtures).values(input);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function deleteFixture(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  await db.delete(fixtures).where(eq(fixtures.id, id));
+  return { success: true as const };
+}

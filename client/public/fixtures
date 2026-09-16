@@ -37,7 +37,7 @@
         </div>
         <div class="results-heading"><span class="eyebrow" style="color:var(--green-700);border-color:rgba(15,107,50,.35);">The archive</span><h2>Past results</h2></div>
         <div class="fixture-panel"><div class="fixture-table-wrap"><table class="fixture-table"><thead><tr><th>Date</th><th>Time</th><th>Team</th><th>Opponent</th><th>Venue</th><th>Competition</th><th>Status</th></tr></thead><tbody data-past-fixtures><tr><td colspan="7">Loading results…</td></tr></tbody></table></div></div>
-        <div class="callout"><div><h2>Keep the pathway moving.</h2><p>Fixture dates can be updated by editing <code>/data/fixtures.json</code> — no page code changes required.</p></div><a href="/contact.html" class="btn btn-primary">Join the academy</a></div>
+        <div class="callout"><div><h2>Keep the pathway moving.</h2><p>Authorized administrators can add, update, or remove fixtures from the matchday management dashboard.</p></div><a href="/contact.html" class="btn btn-primary">Join the academy</a></div>
       </div>
     </section>
 

@@ -15,6 +15,13 @@
       "when": 1787687825107,
       "tag": "0001_far_redwing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1789592908563,
+      "tag": "0002_majestic_nightmare",
+      "breakpoints": true
     }
   ]
 }

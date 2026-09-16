@@ -762,3 +762,14 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 .score-inputs button { border: 0; background: var(--gold); color: #2a1f00; border-radius: 999px; padding: 7px 11px; font: inherit; font-size: .75rem; font-weight: 800; cursor: pointer; }
 .matchday-update label { display: block; color: #fff; font-size: .78rem; font-weight: 700; }
 .matchday-update label .manual-score { display: block; text-align: left; margin-top: 2px; }
+
+.admin-fixtures-panel { margin-top: 52px; padding-top: 42px; border-top: 1px solid var(--border); }
+.admin-fixtures-list { display: grid; gap: 10px; margin: 14px 0 32px; }
+.admin-fixture-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-radius: 10px; }
+.admin-fixture-row strong, .admin-fixture-row span, .admin-fixture-row small { display: block; }
+.admin-fixture-row strong { color: var(--green-900); }
+.admin-fixture-row span { color: var(--ink); font-weight: 700; }
+.admin-fixture-row small { color: var(--muted); margin-top: 3px; }
+.admin-fixture-row .roster-delete { flex-shrink: 0; }
+.empty-state { color: var(--muted); padding: 16px; background: #fff; border: 1px dashed var(--border); border-radius: 10px; }
+@media (max-width: 600px) { .admin-fixture-row { align-items: flex-start; flex-direction: column; } }

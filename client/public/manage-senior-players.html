@@ -63,6 +63,38 @@
           <div id="admin-status" class="form-msg" role="status" aria-live="polite"></div>
           <button class="btn btn-primary" type="submit">Add player to register →</button>
         </form>
+        <section class="admin-fixtures-panel">
+          <div class="roster-toolbar">
+            <div>
+              <span class="eyebrow" style="color:var(--green-700); border-color: rgba(15,107,50,0.35);">Matchday desk</span>
+              <h2>Add or remove fixtures</h2>
+            </div>
+            <a class="text-link" href="/fixtures">View public fixtures ↗</a>
+          </div>
+          <form id="fixture-form" class="player-form" novalidate>
+            <div class="form-row">
+              <div><label for="fixtureDate">Date</label><input id="fixtureDate" name="fixtureDate" type="date" required /></div>
+              <div><label for="fixtureTime">Time</label><input id="fixtureTime" name="fixtureTime" type="time" required /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="fixtureTeam">Team</label><input id="fixtureTeam" name="team" required placeholder="e.g. Senior or U-15" /></div>
+              <div><label for="fixtureOpponent">Opponent</label><input id="fixtureOpponent" name="opponent" required placeholder="e.g. Boom FC" /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="fixtureVenue">Venue</label><select id="fixtureVenue" name="venue"><option>NCC Ground</option><option>Away</option></select></div>
+              <div><label for="fixtureCompetition">Competition</label><input id="fixtureCompetition" name="competition" required placeholder="e.g. FKF County League" /></div>
+            </div>
+            <div class="form-row">
+              <div><label for="fixtureStatus">Status</label><select id="fixtureStatus" name="status"><option>Upcoming</option><option>FT</option><option>Postponed</option></select></div>
+              <div><label for="fixtureScore">Score <span class="field-hint">optional, e.g. 3–1</span></label><input id="fixtureScore" name="score" placeholder="—" /></div>
+            </div>
+            <div><label for="fixtureScorers">Goal scorers <span class="field-hint">comma-separated</span></label><input id="fixtureScorers" name="scorers" placeholder="e.g. Khan Jal Kume, Andrew Mayom" /></div>
+            <div id="fixture-admin-status" class="form-msg" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" type="submit">Add fixture →</button>
+          </form>
+          <h3 class="roster-list-heading">Current fixtures</h3>
+          <div id="admin-fixtures" class="admin-fixtures-list"></div>
+        </section>
         <h2 class="roster-list-heading">Registered players</h2>
         <div id="admin-roster" class="roster-grid"></div>
       </div>
@@ -71,6 +103,7 @@
     <footer class="site-footer"><div class="container"><div class="footer-bottom"><div>© <span id="year"></span> Santos Soka Academy.</div><div>Senior register management</div></div></div></footer>
     <script src="/js/main.js?v=3dc71ae9"></script>
     <script src="/js/senior-roster.js"></script>
+    <script src="/js/fixture-admin.js"></script>
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </body>
 </html>

@@ -197,18 +197,19 @@ if (document.readyState === "loading") {
 }
 
 
-// Fixtures & Matchday — data is editable at /data/fixtures.json.
+// Fixtures & Matchday — public data is served from the database and managed by admins.
 const initializeFixtures = async () => {
   const home = document.querySelector("[data-fixtures-home]");
   const fullPage = document.querySelector("[data-fixtures-page]");
   if (!home && !fullPage) return;
 
   const filterGroup = document.querySelector("[data-fixture-filters]");
-  let payload;
+  let fixtures;
   try {
-    const response = await fetch("/data/fixtures.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Fixtures unavailable");
-    payload = await response.json();
+    const response = await fetch(`/api/trpc/fixtures.list?input=${encodeURIComponent(JSON.stringify({ json: null }))}`, { credentials: "same-origin" });
+    const body = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "Fixtures unavailable");
+    fixtures = body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? [];
   } catch {
     document.querySelectorAll("[data-upcoming-fixtures], [data-past-fixtures]").forEach((body) => {
       body.innerHTML = '<tr><td colspan="7">Fixtures are temporarily unavailable.</td></tr>';
@@ -216,7 +217,11 @@ const initializeFixtures = async () => {
     return;
   }
 
-  const fixtures = Array.isArray(payload.fixtures) ? payload.fixtures : [];
+  fixtures = Array.isArray(fixtures) ? fixtures.map((fixture) => ({
+    ...fixture,
+    date: fixture.date || fixture.fixtureDate,
+    time: fixture.time || fixture.fixtureTime,
+  })) : [];
   const upcoming = fixtures.filter((fixture) => fixture.status === "Upcoming");
   const past = fixtures.filter((fixture) => fixture.status !== "Upcoming");
   const category = (team, competition) => {
@@ -240,7 +245,7 @@ const initializeFixtures = async () => {
   };
   filterGroup?.querySelectorAll("[data-fixture-filter]").forEach((button) => button.addEventListener("click", () => applyFilter(button.dataset.fixtureFilter)));
 
-  const next = fixtures.find((fixture) => fixture.id === payload.nextMatchId) || upcoming[0];
+  const next = upcoming[0];
   if (!next) return;
   const setText = (selector, value) => document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
   setText("[data-matchday-competition]", `${formatDate(next.date)} · ${next.time} · ${next.competition}`);
@@ -266,18 +271,3 @@ const initializeFixtures = async () => {
 };
 
 initializeFixtures();
-
-
-const scoreForm = document.querySelector("[data-score-form]");
-if (scoreForm) {
-  scoreForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const homeScore = scoreForm.querySelector("[data-home-score]")?.value;
-    const awayScore = scoreForm.querySelector("[data-away-score]")?.value;
-    if (homeScore === "" || awayScore === "") return;
-    const score = `${homeScore}–${awayScore}`;
-    document.querySelectorAll("[data-matchday-score]").forEach((element) => { element.textContent = score; });
-    const badge = document.querySelector("[data-matchday-card] .status-badge");
-    if (badge) { badge.textContent = "FULL TIME"; badge.className = "status-badge status-ft"; }
-  });
-}
