@@ -195,3 +195,89 @@ if (document.readyState === "loading") {
 } else {
   initializeSantosInteractions();
 }
+
+
+// Fixtures & Matchday — data is editable at /data/fixtures.json.
+const initializeFixtures = async () => {
+  const home = document.querySelector("[data-fixtures-home]");
+  const fullPage = document.querySelector("[data-fixtures-page]");
+  if (!home && !fullPage) return;
+
+  const filterGroup = document.querySelector("[data-fixture-filters]");
+  let payload;
+  try {
+    const response = await fetch("/data/fixtures.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Fixtures unavailable");
+    payload = await response.json();
+  } catch {
+    document.querySelectorAll("[data-upcoming-fixtures], [data-past-fixtures]").forEach((body) => {
+      body.innerHTML = '<tr><td colspan="7">Fixtures are temporarily unavailable.</td></tr>';
+    });
+    return;
+  }
+
+  const fixtures = Array.isArray(payload.fixtures) ? payload.fixtures : [];
+  const upcoming = fixtures.filter((fixture) => fixture.status === "Upcoming");
+  const past = fixtures.filter((fixture) => fixture.status !== "Upcoming");
+  const category = (team, competition) => {
+    if (competition === "FKF County League") return "county";
+    const age = Number(String(team).replace(/[^0-9]/g, ""));
+    if (team === "Senior" || age >= 17) return "u17-senior";
+    if (age >= 13) return "u13-u16";
+    return "u6-u12";
+  };
+  const formatDate = (date) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
+  const statusClass = (status) => status === "FT" ? "status-ft" : status === "Postponed" ? "status-postponed" : "status-upcoming";
+  const renderRow = (fixture) => `<tr data-fixture-category="${category(fixture.team, fixture.competition)}"><td>${formatDate(fixture.date)}</td><td>${fixture.time}</td><td><strong>${fixture.team}</strong></td><td>${fixture.opponent}</td><td>${fixture.venue}</td><td>${fixture.competition}</td><td><span class="status-badge ${statusClass(fixture.status)}">${fixture.status}${fixture.score ? ` · ${fixture.score}` : ""}</span></td></tr>`;
+
+  const upcomingBodies = document.querySelectorAll("[data-upcoming-fixtures]");
+  upcomingBodies.forEach((body) => { body.innerHTML = upcoming.map(renderRow).join("") || '<tr><td colspan="7">No upcoming fixtures in this category.</td></tr>'; });
+  document.querySelectorAll("[data-past-fixtures]").forEach((body) => { body.innerHTML = past.map(renderRow).join("") || '<tr><td colspan="7">No past results yet.</td></tr>'; });
+
+  const applyFilter = (filter) => {
+    document.querySelectorAll("[data-fixture-category]").forEach((row) => { row.hidden = filter !== "all" && row.dataset.fixtureCategory !== filter; });
+    document.querySelectorAll("[data-fixture-filter]").forEach((button) => button.classList.toggle("active", button.dataset.fixtureFilter === filter));
+  };
+  filterGroup?.querySelectorAll("[data-fixture-filter]").forEach((button) => button.addEventListener("click", () => applyFilter(button.dataset.fixtureFilter)));
+
+  const next = fixtures.find((fixture) => fixture.id === payload.nextMatchId) || upcoming[0];
+  if (!next) return;
+  const setText = (selector, value) => document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
+  setText("[data-matchday-competition]", `${formatDate(next.date)} · ${next.time} · ${next.competition}`);
+  setText("[data-matchday-team]", next.team);
+  setText("[data-matchday-opponent]", next.opponent);
+  setText("[data-matchday-venue]", next.venue);
+  setText("[data-matchday-score]", next.score || "vs");
+  setText("[data-matchday-scorers]", next.scorers?.length ? next.scorers.join(" · ") : "No goals recorded yet.");
+  const card = document.querySelector("[data-matchday-card]");
+  if (card && next.status !== "Upcoming") card.querySelector(".status-badge").textContent = next.status === "FT" ? "FULL TIME" : next.status.toUpperCase();
+
+  const countdown = document.querySelector("[data-countdown]");
+  if (countdown) {
+    const target = new Date(`${next.date}T${next.time}:00+03:00`).getTime();
+    const tick = () => {
+      const remaining = Math.max(0, target - Date.now());
+      const values = [Math.floor(remaining / 86400000), Math.floor(remaining / 3600000) % 24, Math.floor(remaining / 60000) % 60, Math.floor(remaining / 1000) % 60];
+      countdown.querySelectorAll("strong").forEach((element, index) => { element.textContent = String(values[index]).padStart(2, "0"); });
+    };
+    tick();
+    window.setInterval(tick, 1000);
+  }
+};
+
+initializeFixtures();
+
+
+const scoreForm = document.querySelector("[data-score-form]");
+if (scoreForm) {
+  scoreForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const homeScore = scoreForm.querySelector("[data-home-score]")?.value;
+    const awayScore = scoreForm.querySelector("[data-away-score]")?.value;
+    if (homeScore === "" || awayScore === "") return;
+    const score = `${homeScore}–${awayScore}`;
+    document.querySelectorAll("[data-matchday-score]").forEach((element) => { element.textContent = score; });
+    const badge = document.querySelector("[data-matchday-card] .status-badge");
+    if (badge) { badge.textContent = "FULL TIME"; badge.className = "status-badge status-ft"; }
+  });
+}

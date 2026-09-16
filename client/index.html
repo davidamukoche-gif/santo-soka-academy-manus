@@ -43,6 +43,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/teams.html">Teams</a></li>
+          <li><a href="/fixtures">Fixtures</a></li>
           <li><a href="/gallery.html">Gallery</a></li>
           <li><a href="/senior-players.html">Senior players</a></li>
           <li><a href="/contact.html">Contact</a></li>
@@ -114,7 +115,7 @@
         </div>
         <div class="split-media">
           <img
-            src="/manus-storage/u10-training_98c7771a.webp"
+            src="/manus-storage/coach_75991d58.jpg"
             alt="Young footballers training at an academy session"
           />
         </div>
@@ -138,7 +139,7 @@
           <a class="team-card" href="/teams.html#u6">
             <div class="thumb">
               <span class="age">U6</span>
-              <img src="/img/u9.webp" alt="Santos Soka Under-6 players preparing for a youth football session" />
+              <img src="/manus-storage/U_9_6c548b90.webp" alt="Santos Soka young players working through a small-sided football drill" />
               <div class="thumb-title">Little Stars</div>
             </div>
             <div class="body">
@@ -149,7 +150,7 @@
           <a class="team-card" href="/teams.html#u8">
             <div class="thumb">
               <span class="age">U8</span>
-              <img src="/img/u9-alt.webp" alt="Santos Soka Under-8 foundation football training" />
+              <img src="/manus-storage/U9_f279a95d.webp" alt="Santos Soka young players posing with footballs after a youth session" />
               <div class="thumb-title">Foundation</div>
             </div>
             <div class="body">
@@ -160,7 +161,7 @@
           <a class="team-card" href="/teams.html#u10">
             <div class="thumb">
               <span class="age">U10</span>
-              <img src="/manus-storage/u10-training_98c7771a.webp" alt="Santos Soka Under-10 players in a development training session" />
+              <img src="/manus-storage/U_9_6c548b90.webp" alt="Santos Soka young players working through a small-sided football drill" />
               <div class="thumb-title">Development</div>
             </div>
             <div class="body">
@@ -182,7 +183,7 @@
           <a class="team-card" href="/teams.html#u14">
             <div class="thumb">
               <span class="age">U14</span>
-              <img src="/manus-storage/u12-trophy_7b5f8ee5.jpg" alt="Santos Soka youth players celebrating with a football trophy" />
+              <img src="/manus-storage/U_15_306d5f44.webp" alt="Santos Soka Academy teen squad in lime kits with their coach" />
               <div class="thumb-title">Elite Youth</div>
             </div>
             <div class="body">
@@ -193,7 +194,7 @@
           <a class="team-card" href="/teams.html#u16">
             <div class="thumb">
               <span class="age">U16</span>
-              <img src="/img/u15.webp" alt="Santos Soka Under-16 player striking the football during training" />
+              <img src="/manus-storage/U_15_306d5f44.webp" alt="Santos Soka Academy teen squad in lime kits with their coach" />
               <div class="thumb-title">Academy</div>
             </div>
             <div class="body">
@@ -204,7 +205,7 @@
           <a class="team-card" href="/teams.html#u18">
             <div class="thumb">
               <span class="age">U18</span>
-              <img src="/img/future-star-u18.webp" alt="Santos Soka Under-18 squad completing a fitness session" />
+              <img src="/manus-storage/future-star%20u18_b2cb1988.webp" alt="Santos Soka pathway player directing play in an Autowear match kit" />
               <div class="thumb-title">Reserves Pathway</div>
             </div>
             <div class="body">
@@ -215,7 +216,7 @@
           <a class="team-card" href="/teams.html#senior">
             <div class="thumb">
               <span class="age">SEN</span>
-              <img src="/manus-storage/senior-dribble_54b8aaae.webp" alt="Santos Soka senior player dribbling the football during a match" />
+              <img src="/manus-storage/2025_future-star%20champions_20e92139.jpg" alt="Santos Soka players celebrating a Future Stars trophy win" />
               <div class="thumb-title">Senior Team</div>
             </div>
             <div class="body">
@@ -228,6 +229,44 @@
         <div class="center" style="margin-top: 32px;">
           <a href="/teams.html" class="btn btn-primary">See full team pages →</a>
         </div>
+      </div>
+    </section>
+
+    <!-- FIXTURES & MATCHDAY -->
+    <section class="fixtures-home" id="fixtures-matchday">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Fixtures &amp; Matchday</span>
+          <h2>Every match. Every pathway.</h2>
+          <p>Stay close to Santos Soka matchdays, from grassroots festivals to the FKF County League.</p>
+        </div>
+        <div class="fixture-filters" data-fixture-filters>
+          <button class="active" type="button" data-fixture-filter="all">All Teams</button>
+          <button type="button" data-fixture-filter="u6-u12">U-6 to U-12</button>
+          <button type="button" data-fixture-filter="u13-u16">U-13 to U-16</button>
+          <button type="button" data-fixture-filter="u17-senior">U-17 to Senior</button>
+          <button type="button" data-fixture-filter="county">FKF County League</button>
+        </div>
+        <div class="fixtures-layout" data-fixtures-home>
+          <div class="fixture-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Next up</span><h3>Upcoming fixtures</h3></div><span class="live-dot">● Updated from JSON</span></div>
+            <div class="fixture-table-wrap">
+              <table class="fixture-table">
+                <thead><tr><th>Date</th><th>Time</th><th>Team</th><th>Opponent</th><th>Venue</th><th>Competition</th><th>Status</th></tr></thead>
+                <tbody data-upcoming-fixtures><tr><td colspan="7">Loading fixtures…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+          <aside class="matchday-card" data-matchday-card>
+            <div class="matchday-top"><span class="eyebrow">Matchday live</span><span class="status-badge status-upcoming">UPCOMING</span></div>
+            <p class="matchday-competition" data-matchday-competition>Loading next match…</p>
+            <div class="matchup"><div><strong>Santos Soka</strong><span data-matchday-team>Senior</span></div><div class="match-score" data-matchday-score>vs</div><div><strong data-matchday-opponent>Boom FC</strong><span data-matchday-venue>NCC Ground</span></div></div>
+            <div class="countdown" data-countdown><div><strong>—</strong><span>Days</span></div><div><strong>—</strong><span>Hours</span></div><div><strong>—</strong><span>Minutes</span></div><div><strong>—</strong><span>Seconds</span></div></div>
+            <div class="matchday-details"><p><strong>Goal scorers</strong></p><p data-matchday-scorers>No goals recorded yet.</p></div>
+            <form class="matchday-update" data-score-form><label>Score input area <span class="manual-score">Preview only</span></label><div class="score-inputs"><input type="number" min="0" max="99" aria-label="Santos Soka score" placeholder="0" data-home-score /><span>–</span><input type="number" min="0" max="99" aria-label="Opponent score" placeholder="0" data-away-score /><button type="submit">Update</button></div></form>
+          </aside>
+        </div>
+        <div class="center fixture-cta"><a class="btn btn-primary" href="/fixtures">View All Fixtures →</a></div>
       </div>
     </section>
 

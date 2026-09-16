@@ -1,0 +1,97 @@
+{
+  "updatedAt": "2026-09-17",
+  "nextMatchId": "fixture-001",
+  "fixtures": [
+    {
+      "id": "fixture-001",
+      "date": "2026-09-20",
+      "time": "15:00",
+      "team": "Senior",
+      "opponent": "Boom FC",
+      "venue": "NCC Ground",
+      "competition": "FKF County League",
+      "status": "Upcoming",
+      "scorers": []
+    },
+    {
+      "id": "fixture-002",
+      "date": "2026-09-22",
+      "time": "10:00",
+      "team": "U-12",
+      "opponent": "Dagoretti Stars",
+      "venue": "NCC Ground",
+      "competition": "Youth League",
+      "status": "Upcoming",
+      "scorers": []
+    },
+    {
+      "id": "fixture-003",
+      "date": "2026-09-26",
+      "time": "09:00",
+      "team": "U-6",
+      "opponent": "Kawangware Juniors",
+      "venue": "Away",
+      "competition": "Grassroots Festival",
+      "status": "Upcoming",
+      "scorers": []
+    },
+    {
+      "id": "fixture-004",
+      "date": "2026-09-27",
+      "time": "13:00",
+      "team": "U-15",
+      "opponent": "Riruta Youth",
+      "venue": "NCC Ground",
+      "competition": "Nairobi Youth League",
+      "status": "Upcoming",
+      "scorers": []
+    },
+    {
+      "id": "fixture-005",
+      "date": "2026-10-03",
+      "time": "15:30",
+      "team": "U-18",
+      "opponent": "Steplink Academy",
+      "venue": "Away",
+      "competition": "Future Stars U18",
+      "status": "Upcoming",
+      "scorers": []
+    },
+    {
+      "id": "result-001",
+      "date": "2026-09-13",
+      "time": "15:00",
+      "team": "Senior",
+      "opponent": "Steplink Academy",
+      "venue": "NCC Ground",
+      "competition": "FKF County League",
+      "status": "FT",
+      "score": "3–1",
+      "scorers": ["Khan Jal Kume", "Andrew Mayom", "Brian Otieno"]
+    },
+    {
+      "id": "result-002",
+      "date": "2026-09-06",
+      "time": "11:00",
+      "team": "U-18",
+      "opponent": "Future Stars FC",
+      "venue": "Away",
+      "competition": "Future Stars U18",
+      "status": "FT",
+      "score": "2–2",
+      "scorers": ["Andrew Mayom", "Chadwick Mbayi"]
+    },
+    {
+      "id": "result-003",
+      "date": "2026-08-30",
+      "time": "10:00",
+      "team": "U-12",
+      "opponent": "Westlands Academy",
+      "venue": "NCC Ground",
+      "competition": "Youth League",
+      "status": "Postponed",
+      "score": "—",
+      "scorers": []
+    }
+  ]
+}
