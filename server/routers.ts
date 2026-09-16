@@ -3,7 +3,6 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { z } from "zod";
 import { createSeniorPlayer, createTrialRegistration, deleteSeniorPlayer, listSeniorPlayers } from "./db";
-import { notifyOwner } from "./_core/notification";
 import { forwardTrialRegistrationToGoogleWorkspace } from "./googleWorkspace";
 import { adminProcedure, publicProcedure, router } from "./_core/trpc";
 import { storagePut } from "./storage";
@@ -111,37 +110,21 @@ export const appRouter = router({
           message: input.message || null,
         });
 
-        const [notificationSent, emailForwarded] = await Promise.all([
-          notifyOwner({
-            title: "New Santos Soka Academy trial registration",
-          content: [
-            `Player: ${input.player}`,
-            `Date of birth: ${input.dob}`,
-            `Preferred age group: ${input.category}`,
-            `Parent/guardian: ${input.parent}`,
-            `Phone: ${input.phone}`,
-            `Email: ${input.email || "Not provided"}`,
-            `Message: ${input.message || "Not provided"}`,
-            `Registration ID: ${registration.id}`,
-              "Intended forwarding destination: current Google Workspace mailbox",
-            ].join("\n"),
-          }),
-          forwardTrialRegistrationToGoogleWorkspace({
-            player: input.player,
-            dob: input.dob,
-            category: input.category,
-            parent: input.parent,
-            phone: input.phone,
-            email: input.email || undefined,
-            message: input.message || undefined,
-          }),
-        ]);
+        const emailForwarded = await forwardTrialRegistrationToGoogleWorkspace({
+          player: input.player,
+          dob: input.dob,
+          category: input.category,
+          parent: input.parent,
+          phone: input.phone,
+          email: input.email || undefined,
+          message: input.message || undefined,
+        });
 
         if (!emailForwarded) {
           console.warn("[Trials] Stored registration but Gmail forwarding was unavailable");
         }
 
-        return { success: true as const, notificationSent, emailForwarded };
+        return { success: true as const, notificationSent: false, emailForwarded };
       }),
   }),
 });
