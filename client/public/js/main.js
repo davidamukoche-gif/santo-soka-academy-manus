@@ -225,7 +225,7 @@ const initializeFixtures = async () => {
   const upcoming = fixtures.filter((fixture) => fixture.status === "Upcoming");
   const past = fixtures.filter((fixture) => fixture.status !== "Upcoming");
   const category = (team, competition) => {
-    if (competition === "FKF County League") return "county";
+    if (competition === "Regional League") return "county";
     const age = Number(String(team).replace(/[^0-9]/g, ""));
     if (team === "Senior" || age >= 17) return "u17-senior";
     if (age >= 13) return "u13-u16";
