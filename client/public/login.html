@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in — Santos Soka Academy</title><link rel="stylesheet" href="/css/style.css"></head>
+<body><main class="container" style="max-width:520px;padding-top:80px"><h1>Sign in</h1><p>Access the Santos Soka Academy management tools.</p>
+<button class="btn btn-primary" id="google-login" type="button">Continue with Google</button>
+<div style="margin:24px 0;border-top:1px solid #ddd;padding-top:24px"><form id="email-login"><label>Email</label><input id="email" type="email" required style="display:block;width:100%;margin:8px 0 16px;padding:12px"><label>Password</label><input id="password" type="password" required style="display:block;width:100%;margin:8px 0 16px;padding:12px"><button class="btn btn-primary" type="submit">Sign in with email</button></form></div><p id="status" role="status"></p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const supabase=window.supabase.createClient("https://zfsotexwntalgvmsmduq.supabase.co",window.NEXT_PUBLIC_SUPABASE_ANON_KEY||"");
+const status=document.getElementById("status");
+document.getElementById("google-login").onclick=async()=>{const {error}=await supabase.auth.signInWithOAuth({provider:"google",options:{redirectTo:"https://www.santossokaacademy.co.ke/auth/callback"}});if(error)status.textContent=error.message};
+document.getElementById("email-login").onsubmit=async e=>{e.preventDefault();const {error}=await supabase.auth.signInWithPassword({email:email.value,password:password.value});if(error)status.textContent=error.message;else location.href="/"};
+</script></body></html>
