@@ -35,7 +35,6 @@ const initializeSantosInteractions = () => {
   // server-side by adminProcedure; this is only a convenient navigation surface.
   const navLinks = document.querySelector(".nav-links");
   if (navLinks && !navLinks.querySelector(".account-nav")) {
-    const AUTH_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
     const accountItem = document.createElement("li");
     accountItem.className = "account-nav";
     const accountBox = document.createElement("span");
@@ -44,26 +43,20 @@ const initializeSantosInteractions = () => {
     accountItem.appendChild(accountBox);
     navLinks.insertBefore(accountItem, navLinks.lastElementChild);
 
-    const authStartUrl = () => `${AUTH_ORIGIN}/api/oauth/start?returnTo=${encodeURIComponent(`${window.location.pathname}${window.location.search}${window.location.hash}`)}`;
     const rpcAuth = async (procedure, method = "GET") => {
-      const response = await fetch(`/api/trpc/${procedure}${method === "GET" ? `?input=${encodeURIComponent(JSON.stringify({ json: null }))}` : "?batch=1"}`, {
-        method,
-        credentials: "same-origin",
-        headers: method === "POST" ? { "content-type": "application/json" } : undefined,
-        body: method === "POST" ? JSON.stringify({ 0: { json: null } }) : undefined,
-      });
-      const body = await response.json().catch(() => null);
-      if (!response.ok) throw new Error("Authentication request failed");
-      return body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? null;
+      if (procedure === "auth.me") return SantosAPI.api("/auth/me");
+      if (procedure === "auth.logout") return SantosAPI.signOut();
+      return null;
     };
 
     const renderAccount = (user) => {
       accountBox.innerHTML = "";
       if (!user) {
-        const signIn = document.createElement("a");
+        const signIn = document.createElement("button");
         signIn.className = "account-link";
-        signIn.href = authStartUrl();
+        signIn.type = "button";
         signIn.textContent = "Sign in";
+        signIn.addEventListener("click", () => SantosAPI.signInWithMagicLink().catch((error) => { accountBox.textContent = error.message; }));
         accountBox.appendChild(signIn);
         return;
       }
@@ -118,15 +111,8 @@ const initializeSantosInteractions = () => {
         msg.textContent = "Sending your registration…";
       }
       try {
-        const response = await fetch("/api/trpc/trials.submit?batch=1", {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ 0: { json: payload } }),
-        });
-        const body = await response.json();
-        const result = body?.[0]?.result?.data?.json;
-        if (!response.ok || !result?.success) throw new Error("Submission failed");
+        const result = await SantosAPI.api("/trials", { method: "POST", body: JSON.stringify(payload) });
+        if (!result?.success) throw new Error("Submission failed");
         if (msg) msg.textContent = "Thanks! We received your registration and will be in touch soon.";
         form.reset();
       } catch (error) {
@@ -206,10 +192,7 @@ const initializeFixtures = async () => {
   const filterGroup = document.querySelector("[data-fixture-filters]");
   let fixtures;
   try {
-    const response = await fetch(`/api/trpc/fixtures.list?input=${encodeURIComponent(JSON.stringify({ json: null }))}`, { credentials: "same-origin" });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "Fixtures unavailable");
-    fixtures = body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? [];
+    fixtures = await SantosAPI.api("/fixtures");
   } catch {
     document.querySelectorAll("[data-upcoming-fixtures], [data-past-fixtures]").forEach((body) => {
       body.innerHTML = '<tr><td colspan="7">Fixtures are temporarily unavailable.</td></tr>';

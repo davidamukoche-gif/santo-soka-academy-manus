@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm build:frontend",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "cleanUrls": false,
+  "trailingSlash": false
+}

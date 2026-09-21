@@ -9,23 +9,10 @@
     status.textContent = message;
     status.className = `form-msg show ${kind}`.trim();
   };
-  const rpcQuery = async (procedure, input = null) => {
-    const url = `/api/trpc/${procedure}?input=${encodeURIComponent(JSON.stringify({ json: input }))}`;
-    const response = await fetch(url, { credentials: "same-origin" });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "Could not load fixtures.");
-    return body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? [];
-  };
+  const rpcQuery = async (procedure) => SantosAPI.api(procedure === "fixtures.list" ? "/admin/fixtures" : "/fixtures");
   const rpcMutation = async (procedure, input) => {
-    const response = await fetch(`/api/trpc/${procedure}?batch=1`, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ 0: { json: input } }),
-    });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "The request could not be completed.");
-    return body?.[0]?.result?.data?.json;
+    const isRemove = procedure === "fixtures.remove";
+    return SantosAPI.api(isRemove ? `/admin/fixtures/${input.id}` : "/admin/fixtures", { method: isRemove ? "DELETE" : "POST", body: isRemove ? undefined : JSON.stringify(input) });
   };
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character]);
   const formatDate = (date) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });

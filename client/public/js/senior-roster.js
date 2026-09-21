@@ -17,24 +17,17 @@
     status.className = `form-msg show ${kind}`.trim();
   };
 
+  const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published });
+  const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published });
   const rpcQuery = async (procedure, input) => {
-    const url = `/api/trpc/${procedure}?input=${encodeURIComponent(JSON.stringify({ json: input }))}`;
-    const response = await fetch(url, { credentials: "same-origin" });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "Could not load the roster.");
-    return body?.[0]?.result?.data?.json ?? body?.result?.data?.json ?? [];
+    const path = procedure === "seniorPlayers.adminList" ? "/admin/senior-players" : "/senior-players";
+    const rows = await SantosAPI.api(`${path}?season=${encodeURIComponent(input?.season || "2026/27")}`);
+    return rows.map(toPlayer);
   };
-
   const rpcMutation = async (procedure, input) => {
-    const response = await fetch(`/api/trpc/${procedure}?batch=1`, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ 0: { json: input } }),
-    });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new Error(body?.[0]?.error?.json?.message || "The request could not be completed.");
-    return body?.[0]?.result?.data?.json;
+    if (procedure === "seniorPlayers.remove") return SantosAPI.api(`/admin/senior-players/${input.id}`, { method: "DELETE" });
+    if (procedure === "seniorPlayers.create") return SantosAPI.api("/admin/senior-players", { method: "POST", body: JSON.stringify(input) });
+    throw new Error("Unsupported roster operation");
   };
 
   const renderRoster = (players) => {
@@ -104,12 +97,7 @@
   };
 
   seasonSelect?.addEventListener("change", loadRoster);
-  const AUTH_ORIGIN = "https://santosoka-dqvkmaei.manus.space";
-
-  document.querySelector("#login-button")?.addEventListener("click", () => {
-    const returnTo = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-    window.location.href = `${AUTH_ORIGIN}/api/oauth/start?returnTo=${encodeURIComponent(returnTo)}`;
-  });
+  document.querySelector("#login-button")?.addEventListener("click", () => SantosAPI.signInWithMagicLink().catch((error) => setStatus(error.message, "error")));
 
   document.querySelector("#player-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
