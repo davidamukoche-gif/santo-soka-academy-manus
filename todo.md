@@ -100,3 +100,13 @@
 - [x] Add a homepage meta keywords tag containing between 3 and 8 focused keywords, with the upper bound never exceeded.
 - [x] Audit all images rendered at `/` and add meaningful alt text to every image currently missing it.
 - [x] Verify the homepage keywords quantity and confirm no rendered homepage image lacks an alt attribute, then run tests and build.
+
+## Vercel + Supabase Migration
+
+- [x] Create the new `santos-soka-academy` Supabase project and apply the PostgreSQL schema, RLS policies, Auth profile trigger, and senior-player storage bucket.
+- [x] Deploy the `academy-api` Supabase Edge Function with public reads, trial registration forwarding, Supabase Auth checks, and admin-only roster/fixture mutations.
+- [x] Replace public-page tRPC/Manus browser calls with the Supabase browser client and migrate the one confirmed current fixture without inventing roster data.
+- [x] Localize the historical academy media library so the Vercel frontend no longer depends on Manus storage assets.
+- [x] Synchronize the migration source into `davidamukoche-gif/santo-soka-academy` and verify 15 tests, TypeScript, and the Vercel frontend build.
+- [ ] Obtain Vercel team permission to create preview/production deployments and complete the first Vercel deployment.
+- [ ] Add the eventual Vercel/custom-domain URLs to Supabase Auth redirect allowlists, then verify magic-link sign-in and the administrator role gate.

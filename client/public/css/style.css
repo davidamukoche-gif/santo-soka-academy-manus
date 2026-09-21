@@ -165,7 +165,7 @@ p { margin: 0 0 1em; color: #2a3a2f; }
   overflow: hidden;
   background:
     linear-gradient(rgba(6, 40, 20, 0.62), rgba(6, 40, 20, 0.82)),
-    url("/manus-storage/hero-action_607b2404.webp") center 30%/cover no-repeat;
+    url("/assets/hero-action_607b2404.webp") center 30%/cover no-repeat;
 }
 .hero::after {
   content: "";
