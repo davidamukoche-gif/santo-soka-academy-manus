@@ -806,3 +806,15 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 }
 #admin-login-form input:focus { outline: none; border-color: var(--green-500); box-shadow: 0 0 0 3px rgba(21,160,73,.15); }
 #admin-login-form .btn { justify-content: center; margin-top: 12px; }
+
+/* Admin gallery management */
+.admin-gallery-panel { margin-top: 48px; }
+.admin-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.admin-gallery-card { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+.admin-gallery-card > img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #e9f2ea; }
+.admin-gallery-card-body { display: grid; gap: 5px; padding: 12px; }
+.admin-gallery-card-body strong { color: var(--green-900); }
+.admin-gallery-card-body span { color: var(--muted); font-size: .78rem; text-transform: capitalize; }
+.admin-gallery-card-body .roster-delete { justify-self: start; }
+@media (max-width: 900px) { .admin-gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .admin-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }

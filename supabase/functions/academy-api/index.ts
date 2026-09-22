@@ -102,6 +102,12 @@ async function handle(req: Request) {
     return json((data || []).map((row) => ({ ...row, fixtureDate: row.fixture_date, fixtureTime: String(row.fixture_time).slice(0, 5), scorers: Array.isArray(row.scorers) ? row.scorers : [] })));
   }
 
+  if (req.method === "GET" && path === "/gallery") {
+    const { data, error: queryError } = await adminClient.from("gallery_items").select("id,title,alt_text,category,image_url,display_order,created_at").eq("is_published", true).order("display_order", { ascending: true }).order("created_at", { ascending: false });
+    if (queryError) return error(queryError.message, 500);
+    return json(data || []);
+  }
+
   if (req.method === "POST" && path === "/trials") {
     const input = await body(req);
     if (input.website) return json({ success: true });
@@ -115,7 +121,7 @@ async function handle(req: Request) {
     return json({ success: true, emailForwarded });
   }
 
-  if (path === "/admin/senior-players" || path === "/admin/fixtures") {
+  if (path === "/admin/senior-players" || path === "/admin/fixtures" || path === "/admin/gallery") {
     const { user, profile } = await requireAdmin(req);
     if (!user || profile?.role !== "admin") return error("Administrator access is required.", 403);
   }
@@ -174,6 +180,46 @@ async function handle(req: Request) {
     const id = path.split("/").pop();
     const { error: deleteError } = await adminClient.from("fixtures").delete().eq("id", id);
     if (deleteError) return error(deleteError.message, 500);
+    return json({ success: true });
+  }
+
+  if (req.method === "GET" && path === "/admin/gallery") {
+    const { data, error: queryError } = await adminClient.from("gallery_items").select("id,title,alt_text,category,image_key,image_url,display_order,is_published,created_at").order("display_order", { ascending: true }).order("created_at", { ascending: false });
+    if (queryError) return error(queryError.message, 500);
+    return json(data || []);
+  }
+
+  if (req.method === "POST" && path === "/admin/gallery") {
+    const input = await body(req);
+    const title = stringValue(input.title, 1, 160), altText = stringValue(input.altText, 1, 240);
+    const category = ["training", "match", "youth", "senior"].includes(input.category) ? input.category : null;
+    if (!title || !altText || !category || typeof input.imageData !== "string") return error("Title, category, alt text, and image are required.");
+    const match = input.imageData.match(/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\s]+)$/);
+    if (!match) return error("Upload a JPEG, PNG, or WebP image.");
+    const bytes = Uint8Array.from(atob(match[2]), (char) => char.charCodeAt(0));
+    if (bytes.byteLength > 8 * 1024 * 1024) return error("Gallery images must be 8 MB or smaller.");
+    const extension = match[1] === "image/jpeg" ? "jpg" : match[1].slice(6);
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "gallery-image";
+    const key = `${category}/${slug}-${crypto.randomUUID().slice(0, 8)}.${extension}`;
+    const upload = await adminClient.storage.from("gallery").upload(key, bytes, { contentType: match[1], upsert: false });
+    if (upload.error) return error(upload.error.message, 500);
+    const imageUrl = `${supabaseUrl}/storage/v1/object/public/gallery/${key}`;
+    const { data, error: insertError } = await adminClient.from("gallery_items").insert({ title, alt_text: altText, category, image_key: key, image_url: imageUrl, display_order: Number.isInteger(input.displayOrder) ? input.displayOrder : 0, is_published: true }).select("id").single();
+    if (insertError) {
+      await adminClient.storage.from("gallery").remove([key]);
+      return error(insertError.message, 500);
+    }
+    return json({ id: data.id });
+  }
+
+  if (req.method === "DELETE" && path.startsWith("/admin/gallery/")) {
+    const id = path.split("/").pop();
+    const { data: item, error: lookupError } = await adminClient.from("gallery_items").select("image_key").eq("id", id).maybeSingle();
+    if (lookupError) return error(lookupError.message, 500);
+    if (!item) return error("Gallery item not found.", 404);
+    const { error: deleteError } = await adminClient.from("gallery_items").delete().eq("id", id);
+    if (deleteError) return error(deleteError.message, 500);
+    await adminClient.storage.from("gallery").remove([item.image_key]);
     return json({ success: true });
   }
 

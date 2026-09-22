@@ -95,6 +95,31 @@
           <h3 class="roster-list-heading">Current fixtures</h3>
           <div id="admin-fixtures" class="admin-fixtures-list"></div>
         </section>
+        <section class="admin-gallery-panel">
+          <div class="roster-toolbar">
+            <div>
+              <span class="eyebrow" style="color:var(--green-700); border-color: rgba(15,107,50,0.35);">Story desk</span>
+              <h2>Manage public gallery</h2>
+            </div>
+            <a class="text-link" href="/gallery.html">View public gallery ↗</a>
+          </div>
+          <p class="field-hint" style="margin-bottom:18px;">Upload a photo with a clear title and alt text. It will appear publicly in the selected category. Maximum file size: 8 MB.</p>
+          <form id="gallery-form" class="player-form" novalidate>
+            <div class="form-row">
+              <div><label for="galleryTitle">Photo title</label><input id="galleryTitle" name="title" required maxlength="160" placeholder="e.g. U-15 training session" /></div>
+              <div><label for="galleryCategory">Category</label><select id="galleryCategory" name="category" required><option value="training">Training</option><option value="match">Matchday</option><option value="youth">Youth Teams</option><option value="senior">Senior Team</option></select></div>
+            </div>
+            <div><label for="galleryAlt">Image alt text <span class="field-hint">Describe the photo for accessibility</span></label><input id="galleryAlt" name="altText" required maxlength="240" placeholder="Santos Soka players training on the pitch" /></div>
+            <div class="form-row">
+              <div><label for="galleryOrder">Display order</label><input id="galleryOrder" name="displayOrder" type="number" min="0" max="9999" value="0" /></div>
+              <div><label for="galleryImage">Photo <span class="field-hint">JPEG, PNG, or WebP · max 8 MB</span></label><input id="galleryImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required /></div>
+            </div>
+            <div id="gallery-admin-status" class="form-msg" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" type="submit">Upload to public gallery →</button>
+          </form>
+          <h3 class="roster-list-heading">Uploaded gallery photos</h3>
+          <div id="admin-gallery" class="admin-gallery-grid"><p class="field-hint">Loading gallery photos…</p></div>
+        </section>
         <h2 class="roster-list-heading">Registered players</h2>
         <div id="admin-roster" class="roster-grid"></div>
       </div>
@@ -107,6 +132,7 @@
     <script src="/js/main.js?v=20260917-regional-league"></script>
     <script src="/js/senior-roster.js?v=20260917-regional-league"></script>
     <script src="/js/fixture-admin.js?v=20260917-regional-league"></script>
+    <script src="/js/gallery-admin.js?v=20260922-gallery"></script>
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </body>
 </html>

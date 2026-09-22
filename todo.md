@@ -111,4 +111,6 @@
 - [ ] Obtain Vercel team permission to create preview/production deployments and complete the first Vercel deployment.
 - [x] Replace public magic-link/account controls with password-only admin authentication at `/admin/login`, role-check every admin request, and redirect unauthenticated management access to the admin login.
 - [x] Push the admin-only authentication and uploaded-image update to the selected GitHub repository `main` branch.
+- [x] Add an admin gallery manager with Supabase Storage upload/delete, title/category/alt-text fields, and public rendering of managed photos.
+- [x] Deploy and smoke-test the gallery table, storage bucket, public `/gallery` API, protected `/admin/gallery` API, admin dashboard markup, and public gallery loader.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.

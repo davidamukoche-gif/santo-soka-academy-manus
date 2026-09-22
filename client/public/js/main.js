@@ -64,9 +64,8 @@ const initializeSantosInteractions = () => {
   }
 
   // Gallery filters.
-  const galleryItems = document.querySelectorAll("[data-tag]");
   const filterButtons = document.querySelectorAll("[data-f]");
-  if (galleryItems.length && filterButtons.length) {
+  if (filterButtons.length) {
     filterButtons.forEach((filterButton) => {
       filterButton.addEventListener("click", () => {
         const filter = filterButton.getAttribute("data-f");
@@ -75,7 +74,7 @@ const initializeSantosInteractions = () => {
           button.classList.toggle("active", active);
           button.setAttribute("aria-pressed", String(active));
         });
-        galleryItems.forEach((item) => {
+        document.querySelectorAll("#gallery [data-tag]").forEach((item) => {
           item.hidden = !(filter === "all" || item.getAttribute("data-tag") === filter);
         });
       });
