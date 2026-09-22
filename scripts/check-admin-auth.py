@@ -13,8 +13,11 @@ with sync_playwright() as playwright:
     page.goto('http://127.0.0.1:3000/admin/login.html', wait_until='networkidle')
     assert page.locator('#admin-login-form input[type=email]').count() == 1
     assert page.locator('#admin-login-form input[type=password]').count() == 1
+    assert page.locator('#admin-reset-request').count() == 1
     assert page.locator('text=Administrator login').count() == 1
     page.screenshot(path='/tmp/santos-soka-admin-login.png', full_page=False)
+    page.goto('http://127.0.0.1:3000/admin/reset-password.html', wait_until='networkidle')
+    assert page.locator('#admin-reset-form input[type=password]').count() == 2
     page.goto('http://127.0.0.1:3000/manage-senior-players.html', wait_until='networkidle')
     page.wait_for_timeout(500)
     assert '/admin/login' in page.url

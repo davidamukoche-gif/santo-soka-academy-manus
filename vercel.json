@@ -6,6 +6,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/admin/login", "destination": "/admin/login.html" },
+    { "source": "/admin/reset-password", "destination": "/admin/reset-password.html" },
     { "source": "/admin/dashboard", "destination": "/manage-senior-players.html" }
   ]
 }

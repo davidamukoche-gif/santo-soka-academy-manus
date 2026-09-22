@@ -113,4 +113,5 @@
 - [x] Push the admin-only authentication and uploaded-image update to the selected GitHub repository `main` branch.
 - [x] Add an admin gallery manager with Supabase Storage upload/delete, title/category/alt-text fields, and public rendering of managed photos.
 - [x] Deploy and smoke-test the gallery table, storage bucket, public `/gallery` API, protected `/admin/gallery` API, admin dashboard markup, and public gallery loader.
+- [x] Add a secure Supabase password-reset request and completion flow, then send a reset email to the verified academy administrator.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.

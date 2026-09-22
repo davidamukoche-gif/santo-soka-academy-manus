@@ -2,7 +2,7 @@
 (() => {
   const SUPABASE_URL = window.NEXT_PUBLIC_SUPABASE_URL || "https://zfsotexwntalgvmsmduq.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = window.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_gQ-kUAQ0guiN4Ct8ClRJ1Q_KBeL7ibe";
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { detectSessionInUrl: true } });
   const API_BASE = `${SUPABASE_URL}/functions/v1/academy-api`;
 
   const api = async (path, options = {}) => {
@@ -20,6 +20,10 @@
     const result = await client.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
     if (result.error) throw result.error;
     return result.data;
+  };
+  const sendPasswordReset = async (email) => {
+    const result = await client.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo: `${window.location.origin}/admin/reset-password.html` });
+    if (result.error) throw result.error;
   };
 
   const requireAdmin = async () => {
@@ -42,6 +46,7 @@
     client,
     api,
     signInWithPassword,
+    sendPasswordReset,
     requireAdmin,
     signOut: () => client.auth.signOut(),
     getSession: () => client.auth.getSession(),

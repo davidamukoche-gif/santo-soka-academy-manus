@@ -41,4 +41,24 @@
       button.disabled = false;
     }
   });
+
+  document.querySelector("#admin-reset-request")?.addEventListener("click", async () => {
+    const email = form.email.value.trim();
+    if (!email) {
+      setStatus("Enter your administrator email first, then request a reset email.", "error");
+      form.email.focus();
+      return;
+    }
+    const resetButton = document.querySelector("#admin-reset-request");
+    resetButton.disabled = true;
+    setStatus("Sending a password reset email…");
+    try {
+      await SantosAPI.sendPasswordReset(email);
+      setStatus("Check your email for a secure password reset link.", "success");
+    } catch (error) {
+      setStatus(error.message || "We could not send the reset email.", "error");
+    } finally {
+      resetButton.disabled = false;
+    }
+  });
 })();
