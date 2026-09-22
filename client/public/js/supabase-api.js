@@ -1,7 +1,7 @@
 // Santos Soka Academy — Supabase browser client
 (() => {
-  const SUPABASE_URL = "https://zfsotexwntalgvmsmduq.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_gQ-kUAQ0guiN4Ct8ClRJ1Q_KBeL7ibe";
+  const SUPABASE_URL = window.NEXT_PUBLIC_SUPABASE_URL || "https://zfsotexwntalgvmsmduq.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = window.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_gQ-kUAQ0guiN4Ct8ClRJ1Q_KBeL7ibe";
   const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
   const API_BASE = `${SUPABASE_URL}/functions/v1/academy-api`;
 
