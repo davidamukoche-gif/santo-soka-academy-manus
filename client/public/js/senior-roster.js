@@ -18,7 +18,6 @@
   };
 
   const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published });
-  const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published });
   const rpcQuery = async (procedure, input) => {
     const path = procedure === "seniorPlayers.adminList" ? "/admin/senior-players" : "/senior-players";
     const rows = await SantosAPI.api(`${path}?season=${encodeURIComponent(input?.season || "2026/27")}`);
@@ -76,6 +75,10 @@
     const season = seasonSelect?.value || "2026/27";
     const procedure = isAdmin ? "seniorPlayers.adminList" : "seniorPlayers.list";
     try {
+      if (isAdmin && !(await SantosAPI.requireAdmin())) {
+        window.location.replace(`/admin/login?returnTo=${encodeURIComponent(window.location.pathname)}`);
+        return;
+      }
       const players = await rpcQuery(procedure, { season });
       renderRoster(players);
       const heading = document.querySelector("#season-heading");
@@ -97,8 +100,6 @@
   };
 
   seasonSelect?.addEventListener("change", loadRoster);
-  document.querySelector("#login-button")?.addEventListener("click", () => SantosAPI.signInWithMagicLink().catch((error) => setStatus(error.message, "error")));
-
   document.querySelector("#player-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = event.currentTarget;

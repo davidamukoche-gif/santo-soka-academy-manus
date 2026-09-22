@@ -16,22 +16,33 @@
     return body;
   };
 
-  const signInWithMagicLink = async () => {
-    const email = window.prompt("Enter your email address to receive a secure sign-in link:");
-    if (!email) return false;
-    const { error } = await client.auth.signInWithOtp({
-      email: email.trim().toLowerCase(),
-      options: { emailRedirectTo: `${window.location.origin}${window.location.pathname}` },
-    });
-    if (error) throw error;
-    window.alert("Check your email for the secure Santos Soka Academy sign-in link.");
-    return true;
+  const signInWithPassword = async (email, password) => {
+    const result = await client.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
+    if (result.error) throw result.error;
+    return result.data;
+  };
+
+  const requireAdmin = async () => {
+    const { data: { session } } = await client.auth.getSession();
+    if (!session) return null;
+    try {
+      const profile = await api("/auth/me");
+      if (!profile || profile.role !== "admin") {
+        await client.auth.signOut();
+        return null;
+      }
+      return profile;
+    } catch {
+      await client.auth.signOut();
+      return null;
+    }
   };
 
   window.SantosAPI = {
     client,
     api,
-    signInWithMagicLink,
+    signInWithPassword,
+    requireAdmin,
     signOut: () => client.auth.signOut(),
     getSession: () => client.auth.getSession(),
     onAuthStateChange: (callback) => client.auth.onAuthStateChange(callback),

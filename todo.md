@@ -109,4 +109,6 @@
 - [x] Localize the historical academy media library so the Vercel frontend no longer depends on Manus storage assets.
 - [x] Synchronize the migration source into `davidamukoche-gif/santo-soka-academy` and verify 15 tests, TypeScript, and the Vercel frontend build.
 - [ ] Obtain Vercel team permission to create preview/production deployments and complete the first Vercel deployment.
-- [ ] Add the eventual Vercel/custom-domain URLs to Supabase Auth redirect allowlists, then verify magic-link sign-in and the administrator role gate.
+- [x] Replace public magic-link/account controls with password-only admin authentication at `/admin/login`, role-check every admin request, and redirect unauthenticated management access to the admin login.
+- [x] Push the admin-only authentication and uploaded-image update to the selected GitHub repository `main` branch.
+- [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administrator Login — Santos Soka Academy</title>
+    <meta name="description" content="Private administrator sign-in for Santos Soka Academy." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css?v=20260922-admin" />
+    <link rel="icon" type="image/jpeg" href="/assets/crest_48b5cf38.jpg" />
+  </head>
+  <body class="admin-login-page">
+    <header class="site-header">
+      <div class="nav">
+        <a href="/" class="brand">
+          <div class="brand-badge"><img src="/assets/crest_48b5cf38.jpg" alt="Santos Soka Academy crest" /></div>
+          <div class="brand-name">Santos Soka Academy<small>Dagoretti • Nairobi</small></div>
+        </a>
+        <a class="text-link" href="/">Back to website</a>
+      </div>
+    </header>
+    <main class="admin-login-shell">
+      <section class="admin-login-card" aria-labelledby="admin-login-title">
+        <span class="eyebrow" style="color:var(--green-700); border-color:rgba(15,107,50,.35);">Private access</span>
+        <h1 id="admin-login-title">Administrator login</h1>
+        <p>Use the authorized academy administrator email and password. Public visitors do not need an account.</p>
+        <form id="admin-login-form" novalidate>
+          <label for="admin-email">Email address</label>
+          <input id="admin-email" name="email" type="email" autocomplete="username" required placeholder="admin@example.com" />
+          <label for="admin-password">Password</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required placeholder="Your password" />
+          <div id="admin-login-status" class="form-msg" role="status" aria-live="polite"></div>
+          <button class="btn btn-primary" type="submit">Sign in securely</button>
+        </form>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-api.js?v=20260922-admin"></script>
+    <script src="/js/admin-login.js?v=20260922-admin"></script>
+  </body>
+</html>

@@ -38,8 +38,8 @@
     <main class="container roster-page" data-roster-page="admin">
       <div id="admin-login" class="admin-gate" hidden>
         <h2>Administrator sign-in required</h2>
-        <p>Sign in with the authorized Manus account to manage the senior register.</p>
-        <button class="btn btn-primary" id="login-button" type="button">Sign in to continue</button>
+        <p>Use the private administrator login to manage the senior register.</p>
+        <a class="btn btn-primary" href="/admin/login">Open administrator login</a>
       </div>
 
       <div id="admin-content" hidden>
@@ -103,6 +103,7 @@
     <footer class="site-footer"><div class="container"><div class="footer-bottom"><div>© <span id="year"></span> Santos Soka Academy.</div><div>Senior register management</div></div></div></footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/js/supabase-api.js?v=20260921"></script>
+    <script src="/js/admin-guard.js?v=20260922-admin"></script>
     <script src="/js/main.js?v=20260917-regional-league"></script>
     <script src="/js/senior-roster.js?v=20260917-regional-league"></script>
     <script src="/js/fixture-admin.js?v=20260917-regional-league"></script>
