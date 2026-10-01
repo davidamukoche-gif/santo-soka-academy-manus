@@ -136,7 +136,20 @@ async function handle(req: Request) {
   if (req.method === "POST" && path === "/admin/senior-players") {
     const input = await body(req);
     const season = stringValue(input.season || "2026/27", 4, 20), playerName = stringValue(input.playerName, 2, 160), position = stringValue(input.position, 2, 60);
-    if (!season || !playerName || !position || typeof input.imageData !== "string") return error("Season, player name, position, and image are required.");
+    const imageUrlInput = stringValue(input.imageUrl, 10, 2000);
+    if (!season || !playerName || !position || (typeof input.imageData !== "string" && !imageUrlInput) || (typeof input.imageData === "string" && imageUrlInput)) return error("Season, player name, position, and either an uploaded image or image URL are required.");
+    if (imageUrlInput) {
+      try {
+        const parsed = new URL(imageUrlInput);
+        if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("invalid protocol");
+      } catch {
+        return error("Image URL must be a complete public http:// or https:// URL.");
+      }
+      const key = `external/${crypto.randomUUID()}`;
+      const { data, error: insertError } = await adminClient.from("senior_players").insert({ season, player_name: playerName, position, image_key: key, image_url: imageUrlInput, display_order: Number.isInteger(input.displayOrder) ? input.displayOrder : 0, is_published: true }).select("id").single();
+      if (insertError) return error(insertError.message, 500);
+      return json({ id: data.id });
+    }
     const match = input.imageData.match(/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\s]+)$/);
     if (!match) return error("Upload a JPEG, PNG, or WebP image.");
     const bytes = Uint8Array.from(atob(match[2]), (char) => char.charCodeAt(0));

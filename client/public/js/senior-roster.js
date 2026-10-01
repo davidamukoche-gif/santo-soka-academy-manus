@@ -104,22 +104,32 @@
     event.preventDefault();
     const form = event.currentTarget;
     const file = form.image.files?.[0];
-    if (!file) return setStatus("Choose a player image first.", "error");
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) return setStatus("Use a JPEG, PNG, or WebP image.", "error");
-    if (file.size > 5 * 1024 * 1024) return setStatus("Player images must be 5 MB or smaller.", "error");
+    const imageUrl = form.imageUrl.value.trim();
+    if (file && imageUrl) return setStatus("Use either an uploaded image or an image URL, not both.", "error");
+    if (!file && !imageUrl) return setStatus("Upload a player image or paste a public image URL.", "error");
+    if (file && !["image/jpeg", "image/png", "image/webp"].includes(file.type)) return setStatus("Use a JPEG, PNG, or WebP image.", "error");
+    if (file && file.size > 5 * 1024 * 1024) return setStatus("Player images must be 5 MB or smaller.", "error");
+    if (imageUrl) {
+      try {
+        const parsed = new URL(imageUrl);
+        if (!["http:", "https:"].includes(parsed.protocol)) throw new Error();
+      } catch {
+        return setStatus("Paste a complete public image URL beginning with https://.", "error");
+      }
+    }
 
     const submit = form.querySelector("button[type=submit]");
     submit.disabled = true;
-    setStatus("Uploading player image and saving the register entry…");
+    setStatus(file ? "Uploading player image and saving the register entry…" : "Saving the image URL and register entry…");
     try {
-      const imageData = await readFile(file);
-      await rpcMutation("seniorPlayers.create", {
+      const input = {
         season: form.season.value,
         playerName: form.playerName.value,
         position: form.position.value,
         displayOrder: Number(form.displayOrder.value || 0),
-        imageData,
-      });
+        ...(file ? { imageData: await readFile(file) } : { imageUrl }),
+      };
+      await rpcMutation("seniorPlayers.create", input);
       form.reset();
       form.season.value = "2026/27";
       form.displayOrder.value = "0";

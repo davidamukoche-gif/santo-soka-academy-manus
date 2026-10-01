@@ -808,6 +808,7 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 #admin-login-form .btn { justify-content: center; margin-top: 12px; }
 
 /* Admin gallery management */
+.image-url-option { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
 .admin-gallery-panel { margin-top: 48px; }
 .admin-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .admin-gallery-card { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
