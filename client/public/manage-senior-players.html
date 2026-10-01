@@ -59,11 +59,20 @@
             <div><label for="position">Position</label><select id="position" name="position" required><option value="">Select position</option><option>Goalkeeper</option><option>Defender</option><option>Full-back</option><option>Midfielder</option><option>Winger</option><option>Forward</option></select></div>
             <div><label for="displayOrder">Display order</label><input id="displayOrder" name="displayOrder" type="number" min="0" max="999" value="0" /></div>
           </div>
+          <div><label for="playerProfile">Player profile <span class="field-hint">Short public bio or playing description</span></label><textarea id="playerProfile" name="profile" maxlength="1000" rows="3" placeholder="e.g. Creative midfielder known for close control and quick passing."></textarea></div>
+          <div class="stats-grid" aria-label="Player performance statistics">
+            <div><label for="appearances">Appearances</label><input id="appearances" name="appearances" type="number" min="0" max="999" value="0" /></div>
+            <div><label for="goals">Goals</label><input id="goals" name="goals" type="number" min="0" max="999" value="0" /></div>
+            <div><label for="assists">Assists</label><input id="assists" name="assists" type="number" min="0" max="999" value="0" /></div>
+            <div><label for="yellowCards">Yellow cards</label><input id="yellowCards" name="yellowCards" type="number" min="0" max="999" value="0" /></div>
+            <div><label for="redCards">Red cards</label><input id="redCards" name="redCards" type="number" min="0" max="999" value="0" /></div>
+            <div><label for="cleanSheets">Clean sheets <span class="field-hint">Goalkeepers</span></label><input id="cleanSheets" name="cleanSheets" type="number" min="0" max="999" value="0" /></div>
+          </div>
           <div><label for="image">Upload player image <span class="field-hint">JPEG, PNG, or WebP · max 5 MB</span></label><input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" /></div>
           <div class="image-url-option"><label for="imageUrl">Or paste a public image URL <span class="field-hint">The link must be publicly accessible</span></label><input id="imageUrl" name="imageUrl" type="url" inputmode="url" placeholder="https://…/player-photo.jpg" /></div>
           <p class="field-hint">Use one option only: upload a file or paste an image URL.</p>
           <div id="admin-status" class="form-msg" role="status" aria-live="polite"></div>
-          <button class="btn btn-primary" type="submit">Add player to register →</button>
+          <button id="player-submit" class="btn btn-primary" type="submit">Add player to register →</button>
         </form>
         <section class="admin-fixtures-panel">
           <div class="roster-toolbar">

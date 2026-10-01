@@ -49,6 +49,11 @@ function stringValue(value: unknown, min: number, max: number) {
   return typeof value === "string" && value.trim().length >= min && value.trim().length <= max ? value.trim() : null;
 }
 
+function boundedStat(value: unknown) {
+  const number = Number.parseInt(String(value ?? 0), 10);
+  return Number.isFinite(number) ? Math.max(0, Math.min(999, number)) : 0;
+}
+
 function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : null;
 }
@@ -91,7 +96,7 @@ async function handle(req: Request) {
 
   if (req.method === "GET" && path === "/senior-players") {
     const season = new URL(req.url).searchParams.get("season") || "2026/27";
-    const { data, error: queryError } = await adminClient.from("senior_players").select("id,season,player_name,position,image_key,image_url,display_order,is_published,created_at").eq("season", season).eq("is_published", true).order("display_order", { ascending: true }).order("created_at", { ascending: false });
+    const { data, error: queryError } = await adminClient.from("senior_players").select("id,season,player_name,position,image_key,image_url,display_order,is_published,profile,appearances,goals,assists,yellow_cards,red_cards,clean_sheets,created_at").eq("season", season).eq("is_published", true).order("display_order", { ascending: true }).order("created_at", { ascending: false });
     if (queryError) return error(queryError.message, 500);
     return json(data || []);
   }
@@ -128,7 +133,7 @@ async function handle(req: Request) {
 
   if (req.method === "GET" && path === "/admin/senior-players") {
     const season = new URL(req.url).searchParams.get("season") || "2026/27";
-    const { data, error: queryError } = await adminClient.from("senior_players").select("id,season,player_name,position,image_key,image_url,display_order,is_published,created_at").eq("season", season).order("display_order", { ascending: true }).order("created_at", { ascending: false });
+    const { data, error: queryError } = await adminClient.from("senior_players").select("id,season,player_name,position,image_key,image_url,display_order,is_published,profile,appearances,goals,assists,yellow_cards,red_cards,clean_sheets,created_at").eq("season", season).order("display_order", { ascending: true }).order("created_at", { ascending: false });
     if (queryError) return error(queryError.message, 500);
     return json(data || []);
   }
@@ -146,7 +151,7 @@ async function handle(req: Request) {
         return error("Image URL must be a complete public http:// or https:// URL.");
       }
       const key = `external/${crypto.randomUUID()}`;
-      const { data, error: insertError } = await adminClient.from("senior_players").insert({ season, player_name: playerName, position, image_key: key, image_url: imageUrlInput, display_order: Number.isInteger(input.displayOrder) ? input.displayOrder : 0, is_published: true }).select("id").single();
+      const { data, error: insertError } = await adminClient.from("senior_players").insert({ season, player_name: playerName, position, image_key: key, image_url: imageUrlInput, display_order: boundedStat(input.displayOrder), profile: stringValue(input.profile || "", 0, 1000) || "", appearances: boundedStat(input.appearances), goals: boundedStat(input.goals), assists: boundedStat(input.assists), yellow_cards: boundedStat(input.yellowCards), red_cards: boundedStat(input.redCards), clean_sheets: boundedStat(input.cleanSheets), is_published: true }).select("id").single();
       if (insertError) return error(insertError.message, 500);
       return json({ id: data.id });
     }
@@ -160,9 +165,37 @@ async function handle(req: Request) {
     const upload = await adminClient.storage.from("senior-players").upload(key, bytes, { contentType: match[1], upsert: false });
     if (upload.error) return error(upload.error.message, 500);
     const imageUrl = `${supabaseUrl}/storage/v1/object/public/senior-players/${key}`;
-    const { data, error: insertError } = await adminClient.from("senior_players").insert({ season, player_name: playerName, position, image_key: key, image_url: imageUrl, display_order: Number.isInteger(input.displayOrder) ? input.displayOrder : 0, is_published: true }).select("id").single();
+    const { data, error: insertError } = await adminClient.from("senior_players").insert({ season, player_name: playerName, position, image_key: key, image_url: imageUrl, display_order: boundedStat(input.displayOrder), profile: stringValue(input.profile || "", 0, 1000) || "", appearances: boundedStat(input.appearances), goals: boundedStat(input.goals), assists: boundedStat(input.assists), yellow_cards: boundedStat(input.yellowCards), red_cards: boundedStat(input.redCards), clean_sheets: boundedStat(input.cleanSheets), is_published: true }).select("id").single();
     if (insertError) return error(insertError.message, 500);
     return json({ id: data.id });
+  }
+
+  if (req.method === "PATCH" && path.startsWith("/admin/senior-players/")) {
+    const id = path.split("/").pop();
+    const input = await body(req);
+    const season = stringValue(input.season || "2026/27", 4, 20), playerName = stringValue(input.playerName, 2, 160), position = stringValue(input.position, 2, 60);
+    if (!id || !season || !playerName || !position) return error("Season, player name, and position are required.");
+    const updates: Record<string, unknown> = { season, player_name: playerName, position, display_order: boundedStat(input.displayOrder), profile: stringValue(input.profile || "", 0, 1000) || "", appearances: boundedStat(input.appearances), goals: boundedStat(input.goals), assists: boundedStat(input.assists), yellow_cards: boundedStat(input.yellowCards), red_cards: boundedStat(input.redCards), clean_sheets: boundedStat(input.cleanSheets) };
+    const imageUrlInput = stringValue(input.imageUrl, 10, 2000);
+    if (typeof input.imageData === "string" && imageUrlInput) return error("Use either an uploaded image or image URL, not both.");
+    if (imageUrlInput) {
+      try { const parsed = new URL(imageUrlInput); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error(); } catch { return error("Image URL must be a complete public http:// or https:// URL."); }
+      updates.image_key = `external/${crypto.randomUUID()}`;
+      updates.image_url = imageUrlInput;
+    } else if (typeof input.imageData === "string") {
+      const match = input.imageData.match(/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\s]+)$/);
+      if (!match) return error("Upload a JPEG, PNG, or WebP image.");
+      const bytes = Uint8Array.from(atob(match[2]), (char) => char.charCodeAt(0));
+      if (bytes.byteLength > 5 * 1024 * 1024) return error("Player images must be 5 MB or smaller.");
+      const extension = match[1] === "image/jpeg" ? "jpg" : match[1].slice(6), slug = playerName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "player", key = `${season}/${slug}-${crypto.randomUUID().slice(0, 8)}.${extension}`;
+      const upload = await adminClient.storage.from("senior-players").upload(key, bytes, { contentType: match[1], upsert: false });
+      if (upload.error) return error(upload.error.message, 500);
+      updates.image_key = key;
+      updates.image_url = `${supabaseUrl}/storage/v1/object/public/senior-players/${key}`;
+    }
+    const { error: updateError } = await adminClient.from("senior_players").update(updates).eq("id", id);
+    if (updateError) return error(updateError.message, 500);
+    return json({ success: true });
   }
 
   if (req.method === "DELETE" && path.startsWith("/admin/senior-players/")) {

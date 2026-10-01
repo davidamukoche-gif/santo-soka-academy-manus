@@ -647,16 +647,25 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 .roster-card-body { padding: 16px; }
 .roster-card-body h3 { margin: 10px 0 2px; }
 .roster-card-body p { color: var(--muted); font-size: .85rem; margin-bottom: 0; }
+.roster-profile { margin-top: 10px; line-height: 1.45; }
+.roster-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+.roster-stats span { display: grid; gap: 1px; color: var(--muted); font-size: .62rem; text-align: center; }
+.roster-stats strong { color: var(--green-700); font-size: .92rem; }
+.roster-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.roster-edit, .roster-delete { margin-top: 0; padding: 7px 10px; border: 0; border-radius: 7px; font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.roster-edit { background: #e9f3ff; color: #164b78; }
+.roster-edit:hover { background: #d7eaff; }
 .roster-admin-link { margin-top: 34px; text-align: center; }
 .empty-state, .admin-gate { padding: 36px; border: 1px dashed #b8cdbb; border-radius: var(--radius); text-align: center; background: #fff; }
 .player-form { display: grid; gap: 18px; max-width: 820px; padding: 26px; margin-bottom: 48px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .player-form label { display: grid; gap: 6px; font-weight: 700; color: var(--green-900); }
 .field-hint { color: var(--muted); font-size: .78rem; font-weight: 400; }
 .form-msg.show { margin: 0; padding: 10px 12px; border-radius: 8px; background: #eef7ef; color: var(--green-900); }
 .form-msg.error { background: #fff0f0; color: #8a1f1f; }
 .form-msg.success { background: #e7f7eb; color: var(--green-900); }
 .roster-list-heading { margin-top: 10px; }
-.roster-delete { margin-top: 12px; padding: 7px 10px; border: 0; border-radius: 7px; background: #fff0f0; color: #8a1f1f; font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.roster-delete { background: #fff0f0; color: #8a1f1f; }
 .roster-delete:hover { background: #ffe0e0; }
 @media (max-width: 900px) { .roster-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) {
@@ -666,6 +675,7 @@ form.contact textarea { min-height: 120px; resize: vertical; }
   .roster-card-body { padding: 12px; }
   .roster-card-body h3 { font-size: 1rem; }
   .player-form { padding: 18px; }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* Signed-in account control */

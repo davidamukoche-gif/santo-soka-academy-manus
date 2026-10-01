@@ -115,4 +115,5 @@
 - [x] Deploy and smoke-test the gallery table, storage bucket, public `/gallery` API, protected `/admin/gallery` API, admin dashboard markup, and public gallery loader.
 - [x] Add a secure Supabase password-reset request and completion flow, then send a reset email to the verified academy administrator.
 - [x] Add a senior-player image URL option alongside file upload, validate public HTTP(S) URLs, deploy the API update, and push the supplied player image asset to GitHub.
+- [x] Add admin Edit controls for player name, season, position, profile, appearance, goals, assists, yellow cards, red cards, goalkeeper clean sheets, and optional photo replacement; display the profile and stats on the public roster.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.

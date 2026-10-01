@@ -17,7 +17,7 @@
     status.className = `form-msg show ${kind}`.trim();
   };
 
-  const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published });
+  const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published, profile: player.profile || "", appearances: player.appearances || 0, goals: player.goals || 0, assists: player.assists || 0, yellowCards: player.yellow_cards || 0, redCards: player.red_cards || 0, cleanSheets: player.clean_sheets || 0 });
   const rpcQuery = async (procedure, input) => {
     const path = procedure === "seniorPlayers.adminList" ? "/admin/senior-players" : "/senior-players";
     const rows = await SantosAPI.api(`${path}?season=${encodeURIComponent(input?.season || "2026/27")}`);
@@ -26,6 +26,7 @@
   const rpcMutation = async (procedure, input) => {
     if (procedure === "seniorPlayers.remove") return SantosAPI.api(`/admin/senior-players/${input.id}`, { method: "DELETE" });
     if (procedure === "seniorPlayers.create") return SantosAPI.api("/admin/senior-players", { method: "POST", body: JSON.stringify(input) });
+    if (procedure === "seniorPlayers.update") return SantosAPI.api(`/admin/senior-players/${input.id}`, { method: "PATCH", body: JSON.stringify(input) });
     throw new Error("Unsupported roster operation");
   };
 
@@ -41,17 +42,27 @@
     players.forEach((player) => {
       const card = document.createElement("article");
       card.className = "roster-card";
+      const stats = [
+        ["Appearances", player.appearances], ["Goals", player.goals], ["Assists", player.assists],
+        ["Yellow", player.yellowCards], ["Red", player.redCards],
+        ...(String(player.position).toLowerCase() === "goalkeeper" ? [["Clean sheets", player.cleanSheets]] : []),
+      ];
       card.innerHTML = `
         <img src="${player.imageUrl}" alt="${escapeHtml(player.playerName)} — ${escapeHtml(player.position)}" loading="lazy" />
         <div class="roster-card-body">
           <span class="chip">${escapeHtml(player.position)}</span>
           <h3>${escapeHtml(player.playerName)}</h3>
           <p>${escapeHtml(player.season)}</p>
-          ${isAdmin ? `<button class="roster-delete" type="button" data-id="${player.id}">Remove player</button>` : ""}
+          ${player.profile ? `<p class="roster-profile">${escapeHtml(player.profile)}</p>` : ""}
+          <div class="roster-stats">${stats.map(([label, value]) => `<span><strong>${Number(value) || 0}</strong>${label}</span>`).join("")}</div>
+          ${isAdmin ? `<div class="roster-actions"><button class="roster-edit" type="button" data-id="${player.id}">Edit player</button><button class="roster-delete" type="button" data-id="${player.id}">Remove player</button></div>` : ""}
         </div>`;
       roster.appendChild(card);
     });
     if (isAdmin) {
+      roster.querySelectorAll(".roster-edit").forEach((button) => {
+        button.addEventListener("click", () => populateForm(players.find((player) => Number(player.id) === Number(button.dataset.id))));
+      });
       roster.querySelectorAll(".roster-delete").forEach((button) => {
         button.addEventListener("click", async () => {
           if (!window.confirm("Remove this player from the register?")) return;
@@ -105,8 +116,9 @@
     const form = event.currentTarget;
     const file = form.image.files?.[0];
     const imageUrl = form.imageUrl.value.trim();
+    const editingId = form.dataset.editingId;
     if (file && imageUrl) return setStatus("Use either an uploaded image or an image URL, not both.", "error");
-    if (!file && !imageUrl) return setStatus("Upload a player image or paste a public image URL.", "error");
+    if (!editingId && !file && !imageUrl) return setStatus("Upload a player image or paste a public image URL.", "error");
     if (file && !["image/jpeg", "image/png", "image/webp"].includes(file.type)) return setStatus("Use a JPEG, PNG, or WebP image.", "error");
     if (file && file.size > 5 * 1024 * 1024) return setStatus("Player images must be 5 MB or smaller.", "error");
     if (imageUrl) {
@@ -123,17 +135,27 @@
     setStatus(file ? "Uploading player image and saving the register entry…" : "Saving the image URL and register entry…");
     try {
       const input = {
+        ...(editingId ? { id: Number(editingId) } : {}),
         season: form.season.value,
         playerName: form.playerName.value,
         position: form.position.value,
         displayOrder: Number(form.displayOrder.value || 0),
-        ...(file ? { imageData: await readFile(file) } : { imageUrl }),
+        profile: form.profile.value.trim(),
+        appearances: nonNegative(form.appearances.value),
+        goals: nonNegative(form.goals.value),
+        assists: nonNegative(form.assists.value),
+        yellowCards: nonNegative(form.yellowCards.value),
+        redCards: nonNegative(form.redCards.value),
+        cleanSheets: nonNegative(form.cleanSheets.value),
+        ...(file ? { imageData: await readFile(file) } : imageUrl ? { imageUrl } : {}),
       };
-      await rpcMutation("seniorPlayers.create", input);
+      await rpcMutation(editingId ? "seniorPlayers.update" : "seniorPlayers.create", input);
       form.reset();
       form.season.value = "2026/27";
       form.displayOrder.value = "0";
-      setStatus("Player added to the senior register.", "success");
+      delete form.dataset.editingId;
+      submit.textContent = "Add player to register →";
+      setStatus(editingId ? "Player profile updated." : "Player added to the senior register.", "success");
       await loadRoster();
     } catch (error) {
       setStatus(error.message, "error");
@@ -149,6 +171,21 @@
       reader.onerror = () => reject(new Error("Could not read the selected image."));
       reader.readAsDataURL(file);
     });
+  }
+
+  const nonNegative = (value) => Math.max(0, Math.min(999, Number.parseInt(value, 10) || 0));
+  function populateForm(player) {
+    if (!player) return;
+    const form = document.querySelector("#player-form");
+    form.dataset.editingId = player.id;
+    for (const [field, value] of Object.entries({ playerName: player.playerName, season: player.season, position: player.position, displayOrder: player.displayOrder, profile: player.profile, appearances: player.appearances, goals: player.goals, assists: player.assists, yellowCards: player.yellowCards, redCards: player.redCards, cleanSheets: player.cleanSheets })) {
+      if (form[field]) form[field].value = value ?? "";
+    }
+    form.image.value = "";
+    form.imageUrl.value = "";
+    form.querySelector("#player-submit").textContent = "Save player changes →";
+    setStatus(`Editing ${player.playerName}. Add a new image only if you want to replace the current one.`);
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   loadRoster();
