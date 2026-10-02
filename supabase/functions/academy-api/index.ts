@@ -4,7 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const corsHeaders = {
   "Access-Control-Allow-Origin": Deno.env.get("FRONTEND_ORIGIN") || "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
   "Content-Type": "application/json",
 };
 
@@ -126,7 +126,7 @@ async function handle(req: Request) {
     return json({ success: true, emailForwarded });
   }
 
-  if (path === "/admin/senior-players" || path === "/admin/fixtures" || path === "/admin/gallery") {
+  if (path === "/admin/senior-players" || path.startsWith("/admin/senior-players/") || path === "/admin/fixtures" || path === "/admin/gallery") {
     const { user, profile } = await requireAdmin(req);
     if (!user || profile?.role !== "admin") return error("Administrator access is required.", 403);
   }

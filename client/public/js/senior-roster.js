@@ -18,10 +18,12 @@
   };
 
   const toPlayer = (player) => ({ ...player, playerName: player.player_name, imageUrl: player.image_url, displayOrder: player.display_order, isPublished: player.is_published, profile: player.profile || "", appearances: player.appearances || 0, goals: player.goals || 0, assists: player.assists || 0, yellowCards: player.yellow_cards || 0, redCards: player.red_cards || 0, cleanSheets: player.clean_sheets || 0 });
+  const positionRank = { Goalkeeper: 1, Defender: 2, "Full-back": 3, Midfielder: 4, Winger: 5, Forward: 6 };
+  const sortPlayers = (players) => players.slice().sort((a, b) => (positionRank[a.position] || 99) - (positionRank[b.position] || 99) || Number(a.displayOrder || 0) - Number(b.displayOrder || 0) || String(a.playerName).localeCompare(String(b.playerName)));
   const rpcQuery = async (procedure, input) => {
     const path = procedure === "seniorPlayers.adminList" ? "/admin/senior-players" : "/senior-players";
     const rows = await SantosAPI.api(`${path}?season=${encodeURIComponent(input?.season || "2026/27")}`);
-    return rows.map(toPlayer);
+    return sortPlayers(rows.map(toPlayer));
   };
   const rpcMutation = async (procedure, input) => {
     if (procedure === "seniorPlayers.remove") return SantosAPI.api(`/admin/senior-players/${input.id}`, { method: "DELETE" });
@@ -132,7 +134,7 @@
 
     const submit = form.querySelector("button[type=submit]");
     submit.disabled = true;
-    setStatus(file ? "Uploading player image and saving the register entry…" : "Saving the image URL and register entry…");
+    setStatus(editingId ? "Saving player changes…" : file ? "Uploading player image and saving the register entry…" : "Saving the image URL and register entry…");
     try {
       const input = {
         ...(editingId ? { id: Number(editingId) } : {}),
