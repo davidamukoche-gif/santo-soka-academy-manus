@@ -16,8 +16,9 @@
   };
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[character]);
   const formatDate = (date) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  const sides = (fixture) => String(fixture.venue).trim().toLowerCase() === "away" ? { home: fixture.opponent, away: fixture.team } : { home: fixture.team, away: fixture.opponent };
   const renderFixtures = (fixtures) => {
-    list.innerHTML = fixtures.length ? fixtures.map((fixture) => `<article class="admin-fixture-row"><div><strong>${escapeHtml(formatDate(fixture.fixtureDate))} · ${escapeHtml(fixture.fixtureTime)}</strong><span>${escapeHtml(fixture.team)} vs ${escapeHtml(fixture.opponent)}</span><small>${escapeHtml(fixture.venue)} · ${escapeHtml(fixture.competition)} · ${escapeHtml(fixture.status)}${fixture.score ? ` · ${escapeHtml(fixture.score)}` : ""}</small></div><button class="roster-delete" type="button" data-fixture-id="${fixture.id}">Remove</button></article>`).join("") : '<p class="empty-state">No fixtures have been added yet.</p>';
+    list.innerHTML = fixtures.length ? fixtures.map((fixture) => { const { home, away } = sides(fixture); return `<article class="admin-fixture-row"><div><strong>${escapeHtml(formatDate(fixture.fixtureDate))} · ${escapeHtml(fixture.fixtureTime)}</strong><span>${escapeHtml(home)} vs ${escapeHtml(away)}</span><small>${escapeHtml(fixture.venue)} · ${escapeHtml(fixture.competition)} · ${escapeHtml(fixture.status)}${fixture.score ? ` · ${escapeHtml(fixture.score)}` : ""}</small></div><button class="roster-delete" type="button" data-fixture-id="${fixture.id}">Remove</button></article>`; }).join("") : '<p class="empty-state">No fixtures have been added yet.</p>';
     list.querySelectorAll("[data-fixture-id]").forEach((button) => button.addEventListener("click", async () => {
       if (!window.confirm("Remove this fixture from the schedule?")) return;
       button.disabled = true;

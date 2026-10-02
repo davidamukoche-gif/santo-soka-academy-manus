@@ -151,7 +151,8 @@ const initializeFixtures = async () => {
   };
   const formatDate = (date) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
   const statusClass = (status) => status === "FT" ? "status-ft" : status === "Postponed" ? "status-postponed" : "status-upcoming";
-  const renderRow = (fixture) => `<tr data-fixture-category="${category(fixture.team, fixture.competition)}"><td>${formatDate(fixture.date)}</td><td>${fixture.time}</td><td><strong>${fixture.team}</strong></td><td>${fixture.opponent}</td><td>${fixture.venue}</td><td>${fixture.competition}</td><td><span class="status-badge ${statusClass(fixture.status)}">${fixture.status}${fixture.score ? ` · ${fixture.score}` : ""}</span></td></tr>`;
+  const sides = (fixture) => String(fixture.venue).trim().toLowerCase() === "away" ? { home: fixture.opponent, away: fixture.team } : { home: fixture.team, away: fixture.opponent };
+  const renderRow = (fixture) => { const { home, away } = sides(fixture); return `<tr data-fixture-category="${category(fixture.team, fixture.competition)}"><td>${formatDate(fixture.date)}</td><td>${fixture.time}</td><td><strong>${home}</strong></td><td>${away}</td><td>${fixture.venue}</td><td>${fixture.competition}</td><td><span class="status-badge ${statusClass(fixture.status)}">${fixture.status}${fixture.score ? ` · ${fixture.score}` : ""}</span></td></tr>`; };
 
   const upcomingBodies = document.querySelectorAll("[data-upcoming-fixtures]");
   upcomingBodies.forEach((body) => { body.innerHTML = upcoming.map(renderRow).join("") || '<tr><td colspan="7">No upcoming fixtures in this category.</td></tr>'; });
@@ -167,9 +168,11 @@ const initializeFixtures = async () => {
   if (!next) return;
   const setText = (selector, value) => document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
   setText("[data-matchday-competition]", `${formatDate(next.date)} · ${next.time} · ${next.competition}`);
-  setText("[data-matchday-team]", next.team);
-  setText("[data-matchday-opponent]", next.opponent);
-  setText("[data-matchday-venue]", next.venue);
+  const nextSides = sides(next);
+  setText("[data-matchday-home]", nextSides.home);
+  setText("[data-matchday-home-team]", next.venue === "Away" ? "Opponent" : next.team);
+  setText("[data-matchday-away]", nextSides.away);
+  setText("[data-matchday-away-team]", next.venue === "Away" ? next.team : next.venue);
   setText("[data-matchday-score]", next.score || "vs");
   setText("[data-matchday-scorers]", next.scorers?.length ? next.scorers.join(" · ") : "No goals recorded yet.");
   const card = document.querySelector("[data-matchday-card]");
