@@ -140,7 +140,15 @@ const initializeFixtures = async () => {
     date: fixture.date || fixture.fixtureDate,
     time: fixture.time || fixture.fixtureTime,
   })) : [];
-  const upcoming = fixtures.filter((fixture) => fixture.status === "Upcoming");
+  // Fixture date/time values are entered in Kenya time (EAT, UTC+03:00).
+  // Once an Upcoming fixture's scheduled start has passed, remove it from
+  // public matchday content until an administrator updates it or adds a new
+  // fixture. Explicit FT/Postponed records remain visible in the archive.
+  const fixtureTimestamp = (fixture) => {
+    const timestamp = Date.parse(`${fixture.date}T${String(fixture.time || "00:00").slice(0, 5)}:00+03:00`);
+    return Number.isFinite(timestamp) ? timestamp : 0;
+  };
+  const upcoming = fixtures.filter((fixture) => fixture.status === "Upcoming" && fixtureTimestamp(fixture) > Date.now());
   const past = fixtures.filter((fixture) => fixture.status !== "Upcoming");
   const category = (team, competition) => {
     if (competition === "Regional League") return "county";
@@ -165,7 +173,12 @@ const initializeFixtures = async () => {
   filterGroup?.querySelectorAll("[data-fixture-filter]").forEach((button) => button.addEventListener("click", () => applyFilter(button.dataset.fixtureFilter)));
 
   const next = upcoming[0];
-  if (!next) return;
+  const card = document.querySelector("[data-matchday-card]");
+  if (!next) {
+    if (card) card.hidden = true;
+    return;
+  }
+  if (card) card.hidden = false;
   const setText = (selector, value) => document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
   setText("[data-matchday-competition]", `${formatDate(next.date)} · ${next.time} · ${next.competition}`);
   const nextSides = sides(next);
@@ -175,7 +188,6 @@ const initializeFixtures = async () => {
   setText("[data-matchday-away-team]", next.venue === "Away" ? next.team : next.venue);
   setText("[data-matchday-score]", next.score || "vs");
   setText("[data-matchday-scorers]", next.scorers?.length ? next.scorers.join(" · ") : "No goals recorded yet.");
-  const card = document.querySelector("[data-matchday-card]");
   if (card && next.status !== "Upcoming") card.querySelector(".status-badge").textContent = next.status === "FT" ? "FULL TIME" : next.status.toUpperCase();
 
   const countdown = document.querySelector("[data-countdown]");

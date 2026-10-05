@@ -118,4 +118,5 @@
 - [x] Add admin Edit controls for player name, season, position, profile, appearance, goals, assists, yellow cards, red cards, goalkeeper clean sheets, and optional photo replacement; display the profile and stats on the public roster.
 - [x] Repair the senior-player Edit request by allowing authenticated PATCH calls through the Edge Function, and sort public/admin players from Goalkeeper through Forward.
 - [x] Add Google site-name SEO foundations: SportsOrganization JSON-LD, canonical/Open Graph metadata, crawlable robots.txt and sitemap.xml, and a public PNG logo URL.
+- [x] Automatically remove expired Upcoming fixtures from public matchday content after their Kenya-time kickoff; keep explicit FT/Postponed results visible and leave the underlying fixture available for admin updates.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.
