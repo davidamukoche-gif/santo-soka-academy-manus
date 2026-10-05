@@ -119,4 +119,5 @@
 - [x] Repair the senior-player Edit request by allowing authenticated PATCH calls through the Edge Function, and sort public/admin players from Goalkeeper through Forward.
 - [x] Add Google site-name SEO foundations: SportsOrganization JSON-LD, canonical/Open Graph metadata, crawlable robots.txt and sitemap.xml, and a public PNG logo URL.
 - [x] Automatically remove expired Upcoming fixtures from public matchday content after their Kenya-time kickoff; keep explicit FT/Postponed results visible and leave the underlying fixture available for admin updates.
+- [x] Move the homepage Fixtures & Matchday section directly below the hero so upcoming fixtures are the first content visitors see, with explicit Home team/Away team labels.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.
