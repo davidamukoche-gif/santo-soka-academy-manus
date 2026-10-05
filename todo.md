@@ -67,13 +67,13 @@
 - [x] Save a corrected checkpoint after successful published OAuth verification.
 - [x] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
 - [x] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
-- [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
+- [x] Supersede ordinary-user login testing: the approved current requirement is a fully public site with no visitor login; only the private administrator password login remains.
 - [x] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are complete, with browser sign-in still pending.
 - [x] Add or update automated authentication tests and verify the management-page role gate.
 - [x] Verify login behavior in the browser and save a corrected checkpoint with the authorized Manus session.
-- [ ] Reproduce ordinary-user login separately on preview and published domains and record the actual result.
+- [x] Supersede ordinary-user login reproduction: no public sign-in route or visitor account control is intentionally exposed.
 - [x] Ensure preview login starts on the published allowlisted origin so the host-only OAuth nonce cookie matches the callback host.
-- [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
+- [x] Verify the admin-only role gate in code and browser smoke tests; normal-user sign-in is intentionally not part of the current product.
 - [x] Add focused coverage for preview login origin compatibility before the final authentication checkpoint.
 - [x] Route the static administrator login button through the same published OAuth origin as the React user login so preview cookies match the callback host.
 - [x] Add an easy in-site account control that shows sign-in/sign-out state across public pages.
@@ -85,10 +85,10 @@
 - [x] Reproduce the reported missing sign-in option in the user’s browser across desktop navigation, mobile navigation, and the protected management page.
 - [x] Reproduce the reported missing WhatsApp chat action across the published homepage and Contact page.
 - [x] Fix any navigation/session or WhatsApp rendering/interaction issue found, then verify responsive behavior and publish a checkpoint.
-- [ ] Reproduce the missing sign-in/account control on the published site in a mobile viewport and capture the mobile navigation state.
+- [x] Supersede the old public sign-in mobile check: the public site intentionally has no visitor sign-in/account control.
 - [x] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
 - [x] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
-- [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
+- [x] Complete the applicable mobile/public navigation checks at 375px: menu opens, Contact remains reachable, WhatsApp remains present, and no visitor login/register control appears.
 - [x] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
 - [x] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them through the authoritative Cloudflare DNS zone, and verifying HTTPS after propagation.
 - [x] Diagnose why the custom-domain connection for `santossokaacademy.co.ke` is not working and record the current Manus domain state.
@@ -117,4 +117,5 @@
 - [x] Add a senior-player image URL option alongside file upload, validate public HTTP(S) URLs, deploy the API update, and push the supplied player image asset to GitHub.
 - [x] Add admin Edit controls for player name, season, position, profile, appearance, goals, assists, yellow cards, red cards, goalkeeper clean sheets, and optional photo replacement; display the profile and stats on the public roster.
 - [x] Repair the senior-player Edit request by allowing authenticated PATCH calls through the Edge Function, and sort public/admin players from Goalkeeper through Forward.
+- [x] Add Google site-name SEO foundations: SportsOrganization JSON-LD, canonical/Open Graph metadata, crawlable robots.txt and sitemap.xml, and a public PNG logo URL.
 - [ ] Configure the live Vercel/custom-domain deployment and verify the authorized administrator’s real email/password login and role gate.
