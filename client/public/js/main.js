@@ -37,7 +37,6 @@ const initializeSantosInteractions = () => {
       e.preventDefault();
       const button = form.querySelector("button[type=submit]");
       const msg = form.querySelector(".form-msg");
-      const payload = Object.fromEntries(new FormData(form).entries());
       if (button) {
         button.disabled = true;
         button.setAttribute("aria-busy", "true");
@@ -47,8 +46,14 @@ const initializeSantosInteractions = () => {
         msg.textContent = "Sending your registration…";
       }
       try {
-        const result = await SantosAPI.api("/trials", { method: "POST", body: JSON.stringify(payload) });
-        if (!result?.success) throw new Error("Submission failed");
+        const endpoint = form.getAttribute("action");
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok) throw new Error(result?.errors?.[0]?.message || "Submission failed");
         if (msg) msg.textContent = "Thanks! We received your registration and will be in touch soon.";
         form.reset();
       } catch (error) {
