@@ -9,6 +9,7 @@
     status.className = `form-msg show ${kind}`.trim();
   };
   const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[character]));
+  const categoryLabel = (category) => ({ training: "Training", match: "Matchday", youth: "Youth Teams", senior: "Senior Team", "team-u6": "Under-6", "team-u8": "Under-8", "team-u10": "Under-10", "team-u12": "Under-12", "team-u13": "Under-13", "team-u14": "Under-14", "team-u16": "Under-16", "team-u18": "Under-18", "team-senior": "Senior Team" }[category] || category);
   const readDataUrl = (file) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
@@ -23,7 +24,7 @@
     }
     list.innerHTML = items.map((item) => `<article class="admin-gallery-card">
       <img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.alt_text)}" loading="lazy" />
-      <div class="admin-gallery-card-body"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.category)} · order ${item.display_order}</span><button class="roster-delete" type="button" data-gallery-delete="${escapeHtml(item.id)}">Delete photo</button></div>
+      <div class="admin-gallery-card-body"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(categoryLabel(item.category))} · order ${item.display_order}</span><button class="roster-delete" type="button" data-gallery-delete="${escapeHtml(item.id)}">Delete photo</button></div>
     </article>`).join("");
   };
 

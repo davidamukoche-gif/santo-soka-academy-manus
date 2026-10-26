@@ -238,7 +238,7 @@ async function handle(req: Request) {
   if (req.method === "POST" && path === "/admin/gallery") {
     const input = await body(req);
     const title = stringValue(input.title, 1, 160), altText = stringValue(input.altText, 1, 240);
-    const category = ["training", "match", "youth", "senior"].includes(input.category) ? input.category : null;
+    const category = ["training", "match", "youth", "senior", "team-u6", "team-u8", "team-u10", "team-u12", "team-u13", "team-u14", "team-u16", "team-u18", "team-senior"].includes(input.category) ? input.category : null;
     if (!title || !altText || !category || typeof input.imageData !== "string") return error("Title, category, alt text, and image are required.");
     const match = input.imageData.match(/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\s]+)$/);
     if (!match) return error("Upload a JPEG, PNG, or WebP image.");

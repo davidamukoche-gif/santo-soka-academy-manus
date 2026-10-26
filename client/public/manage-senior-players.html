@@ -117,8 +117,8 @@
           <p class="field-hint" style="margin-bottom:18px;">Upload a photo with a clear title and alt text. It will appear publicly in the selected category. Maximum file size: 8 MB.</p>
           <form id="gallery-form" class="player-form" novalidate>
             <div class="form-row">
-              <div><label for="galleryTitle">Photo title</label><input id="galleryTitle" name="title" required maxlength="160" placeholder="e.g. U-15 training session" /></div>
-              <div><label for="galleryCategory">Category</label><select id="galleryCategory" name="category" required><option value="training">Training</option><option value="match">Matchday</option><option value="youth">Youth Teams</option><option value="senior">Senior Team</option></select></div>
+              <div><label for="galleryTitle">Photo or poster title</label><input id="galleryTitle" name="title" required maxlength="160" placeholder="e.g. U-15 training session" /></div>
+              <div><label for="galleryCategory">Category</label><select id="galleryCategory" name="category" required><optgroup label="Gallery categories"><option value="training">Training</option><option value="match">Matchday</option><option value="youth">Youth Teams</option><option value="senior">Senior Team</option></optgroup><optgroup label="Individual team categories"><option value="team-u6">Under-6</option><option value="team-u8">Under-8</option><option value="team-u10">Under-10</option><option value="team-u12">Under-12</option><option value="team-u13">Under-13</option><option value="team-u14">Under-14</option><option value="team-u16">Under-16</option><option value="team-u18">Under-18</option><option value="team-senior">Senior Team</option></optgroup></select></div>
             </div>
             <div><label for="galleryAlt">Image alt text <span class="field-hint">Describe the photo for accessibility</span></label><input id="galleryAlt" name="altText" required maxlength="240" placeholder="Santos Soka players training on the pitch" /></div>
             <div class="form-row">

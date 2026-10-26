@@ -25,6 +25,17 @@
       }
       .filters button:hover { border-color: var(--green-700); }
       .filters button.active { background: var(--green-700); color: #fff; border-color: var(--green-700); }
+      #gallery figure { cursor: zoom-in; }
+      .lightbox-open { overflow: hidden; }
+      .gallery-lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; }
+      .gallery-lightbox[hidden] { display: none; }
+      .gallery-lightbox-backdrop { position: absolute; inset: 0; background: rgba(2, 18, 9, .88); backdrop-filter: blur(5px); }
+      .gallery-lightbox-dialog { position: relative; z-index: 1; width: min(100%, 1120px); max-height: calc(100vh - 48px); display: grid; place-items: center; gap: 12px; }
+      .gallery-lightbox-image { display: block; max-width: 100%; max-height: calc(100vh - 130px); width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.45); background: #fff; }
+      .gallery-lightbox-caption { color: #fff; text-align: center; margin: 0; font-weight: 600; }
+      .gallery-lightbox-close { position: absolute; top: -12px; right: -8px; z-index: 2; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: rgba(5, 45, 23, .92); color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; }
+      .gallery-lightbox-close:hover { background: var(--green-700); }
+      @media (max-width: 720px) { .gallery-lightbox { padding: 14px; } .gallery-lightbox-close { top: -8px; right: -4px; } .gallery-lightbox-image { max-height: calc(100vh - 105px); } }
     </style>
   </head>
   <body>
@@ -62,6 +73,7 @@
           <button data-f="match">Matchday</button>
           <button data-f="youth">Youth Teams</button>
           <button data-f="senior">Senior Team</button>
+          <button data-f="teams">Individual Teams</button>
         </div>
 
         <div class="gallery" id="gallery">
@@ -189,7 +201,8 @@
         btn.classList.add("active");
         const f = btn.dataset.f;
         gallery.querySelectorAll("figure").forEach(fig => {
-          fig.style.display = (f === "all" || fig.dataset.tag === f) ? "" : "none";
+          const isTeamMedia = fig.dataset.tag?.startsWith("team-");
+          fig.style.display = (f === "all" || fig.dataset.tag === f || (f === "teams" && isTeamMedia)) ? "" : "none";
         });
       });
     </script>

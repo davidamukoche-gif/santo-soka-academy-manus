@@ -66,6 +66,11 @@
         font-size: 0.9rem;
       }
       .anchor-nav a:hover { background: var(--green-700); color: #fff; text-decoration: none; }
+      .team-media-uploaded { display: none; position: absolute; left: 14px; right: 14px; bottom: 14px; gap: 8px; z-index: 2; }
+      .team-media-uploaded.has-items { display: flex; flex-wrap: wrap; }
+      .team-media-uploaded a { display: block; width: 72px; height: 56px; border: 2px solid rgba(255,255,255,.9); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 16px rgba(0,0,0,.25); background: #fff; }
+      .team-media-uploaded img { width: 100%; height: 100%; object-fit: cover; }
+      .team-media-uploaded-label { align-self: center; padding: 6px 10px; border-radius: 999px; background: rgba(4,39,20,.82); color: #fff; font-size: .72rem; font-weight: 700; }
     </style>
   </head>
   <body>
@@ -321,6 +326,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/js/supabase-api.js?v=20260921"></script>
     <script src="/js/main.js?v=20260917-regional-league"></script>
+    <script src="/js/teams.js?v=20261026-team-media"></script>
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </body>
 </html>
